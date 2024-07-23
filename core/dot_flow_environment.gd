@@ -7,6 +7,7 @@ extends Node
 
 @onready var lua = DFScripter.lua
 
+# Temporary Lua String For Testing, Will Be Replaced With File Reading
 var lua_string: String = """
 	width = 48.75
 	fieldType = "HighSchool"
@@ -97,18 +98,18 @@ var lua_string: String = """
 	end
 	
 	function Grid(gridSize) -- Function that runs creating the grid
-	stepper = 0
+	stepper = 2.5
 	
-	while stepper >= width * -1 do
-		drawLine(-60, stepper, 60, stepper, 0.01, "MAGENTA", 0.0075)
+	while stepper >= width * -1 - 2.5 do
+		drawLine(-62.5, stepper, 62.5, stepper, 0.01, "MAGENTA", 0.0075)
 		--drawPlane(0, stepper, 120, 0.01, "PINK", 0.0075)
 		stepper = stepper - gridSize
 	end
 	
-	stepper = -60
+	stepper = -62.5
 	
-	while stepper <= 60 do
-		drawLine(stepper, 0, stepper, width * -1, 0.01, "MAGENTA", 0.0075)
+	while stepper <= 62.5 do
+		drawLine(stepper, 2.5, stepper, width * -1 - 2.5, 0.01, "MAGENTA", 0.0075)
 		--drawPlane(stepper, 0, 0.01, width, "PINK", 0.0075)
 		stepper = stepper + gridSize
 	end
@@ -169,7 +170,7 @@ func _add_custom_mesh(path: String,location: Vector3,rotation:Vector3, scale: fl
 		gltf_scene_root_node.rotation_degrees = rotation
 		full_node.add_child(gltf_scene_root_node)
 	else:
-		OS.alert("Couldn't load glTF scene (error code: %s)." % error_string(error))
+		OS.alert("Couldn't load glTF scene (error: %s %s)." % [error, error_string(error)])
 
 func _add_image(path: String,location: Vector3,rotation:Vector3, scale: float = 1) -> void:
 	var ent = Sprite3D.new()

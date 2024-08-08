@@ -21,12 +21,14 @@
 
 DotFlow is being built with Godot 4.2.2 Stable, download it [here](https://godotengine.org/download/archive/4.2.2-stable/).
 
-1. Clone This Repo to your machine.
+1. Clone The Main Repo to your machine. 
 2. Open the Godot executable you downloaded.
 3. In the top left, select <code>import</code>.
 4. In the dialog, open the <code>project.godot</code> file in the repo.
 5. select <code>Import & Edit</code>.
 6. To start the program, select the play button in the top right.
+
+<sup>**Only the Main Branch is validated to be working. <code>indev</code> is the active development branch, and should be assumed non-working.**</sup>
 
 **Note - No PRs will be accepted while DotFlow is in Early Development Status.**<br>
 <sub>This status will remain until the core functionality is implemented. This is to avoid conflicting architecture choices early on.</sub>

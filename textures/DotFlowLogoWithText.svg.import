@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dae5rihx4jqxq"
-path="res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+uid="uid://b4gm6jma02mw2"
+path="res://.godot/imported/DotFlowLogoWithText.svg-e070b33adcf853b63b2496f632f2d0ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.svg"
-dest_files=["res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"]
+source_file="res://textures/DotFlowLogoWithText.svg"
+dest_files=["res://.godot/imported/DotFlowLogoWithText.svg-e070b33adcf853b63b2496f632f2d0ed.ctex"]
 
 [params]
 

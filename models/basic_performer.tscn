@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://chxe3ibh2yg8a"]
+
+[ext_resource type="PackedScene" uid="uid://cqi48e7pn1p7e" path="res://imports/basic_performer.glb" id="1_p3wvf"]
+[ext_resource type="Script" path="res://models/scripts/basic_performer.gd" id="2_gk1f0"]
+[ext_resource type="Texture2D" uid="uid://bvc0pank2wvuk" path="res://textures/LocationIcon.png" id="3_ggy8a"]
+[ext_resource type="Texture2D" uid="uid://byw2bas2fecnh" path="res://textures/SelectionIcon.png" id="4_y18ya"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imbib"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g4ym"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gyuq7"]
+size = Vector3(1, 2, 1)
+
+[node name="basic_performer" instance=ExtResource("1_p3wvf")]
+script = ExtResource("2_gk1f0")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_imbib")
+surface_material_override/1 = SubResource("StandardMaterial3D_6g4ym")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_gyuq7")
+
+[node name="Dot" type="Sprite3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+texture = ExtResource("3_ggy8a")
+
+[node name="Selected" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.02, 0)
+texture = ExtResource("4_y18ya")

@@ -1,5 +1,6 @@
 class_name DotFlowShow
 extends Node
+## Dot Flow Show Core Class
 
 var title: String = "My New Show"
 var subtitle: String = "Made With DotFlow"

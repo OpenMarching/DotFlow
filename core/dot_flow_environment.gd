@@ -7,135 +7,42 @@ extends Node
 
 @onready var lua = DFScripter.lua
 
-# Temporary Lua String For Testing, Will Be Replaced With File Reading
-var lua_string: String = """
-	width = 48.75
-	fieldType = "HighSchool"
-	
-	function Full()
-	addSkyEnvironment(Vector3(-45,-30,0))
-	drawGroundPlane(0, (width / 2) * -1, 120, width, "DARKGREEN")
-	drawSubPlane(1000, 1000, "BLACK")
-	
-	-- addMesh("G:/Godot_Projects/Open Marching Editor/userBaseFiles/ABeautifulGame/ABeautifulGame.gltf",Vector3(0, 0, width * -1.1), Vector3(0, 90, 0), 10)
-	addText("OPEN MARCHING", Vector3(-55, 0.01, width / -2), Vector3(-90, 0, 90), 30, "WHITE")
-	addText("OPEN MARCHING", Vector3(55, 0.01, width / -2), Vector3(-90, 0, 270), 30, "WHITE")
-	-- addImage("res://sprites/Logo.png", Vector3(0, 0.005, width / -2), Vector3(-90, 0, 0), 2.5)
-	
-	drawLine(Vector2(5,-5),Vector2(0,-10),0.5,"WHITE")
-	
-	for i = -50,50 do
-		if i % 5 ~= 0 then
-			drawPlane(i, 0, 0.1, 0.61, "WHITE") -- High School
-			drawPlane(i, (width * -1) + 0.61, 0.1, 0.61, "WHITE")
-			if fieldType == "HighSchool" then
-				drawPlane(i, (width / -2) - (17.7 / 2), 0.1, 0.61, "WHITE")
-				drawPlane(i, (width / -2) + (17.7 / 2) + .61, 0.1, 0.61, "WHITE")
-			end
-			if fieldType == "College" then -- College
-				drawPlane(i, (width / -2) - (13.4 / 2), 0.1, 0.61, "WHITE")
-				drawPlane(i, (width / -2) + (13.4 / 2) + .61, 0.1, 0.61, "WHITE")
-			end
-			if fieldType == "NFL" then -- NFL
-				drawPlane(i, (width / -2) - (6 / 2), 0.1, 0.61, "WHITE")
-				drawPlane(i, (width / -2) + (6 / 2) + .61, 0.1, 0.61, "WHITE")
-			end
-		end
-		if i % 5 == 0 then
-			drawLine(i,0,i,width * -1,0.1,"WHITE")
-			drawPlane(i, 0, 0.1, width, "WHITE")
-			if i ~= -50 and i ~= 50 then
-				if fieldType == "HighSchool" then
-					drawPlane(i, (width / -2) - (17.7 / 2), 0.6, 0.1, "WHITE")
-					drawPlane(i, (width / -2) + (17.7 / 2) + .1, 0.6, 0.1, "WHITE")
-				end
-				if fieldType == "College" then -- College
-					drawPlane(i, (width / -2) - (13.4 / 2), 0.6, 0.1, "WHITE")
-					drawPlane(i, (width / -2) + (13.4 / 2) + .1, 0.6, 0.1, "WHITE")
-				end
-				if fieldType == "NFL" then -- NFL
-					drawPlane(i, (width / -2) - (6 / 2), 0.6, 0.1, "WHITE")
-					drawPlane(i, (width / -2) + (6 / 2) + .1, 0.6, 0.1, "WHITE")
-				end
-			end
-		end
-		--[[ This is much better but can't use due to bug :(
-		if i % 10 == 0 and i ~= -50 and i ~= 50 then
-			val = i
-			if i < 0 then
-				val = i * -1
-			end
-			addText(tostring(50 - val):gsub(".", "%1 "):sub(1, -2), Vector3(i, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText(tostring(50 - val):gsub(".", "%1 "):sub(1, -2), Vector3(i, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-		end
-		-- Due to a bug in macOS, we are required to do yard numbers manually, ]]--
-		if i % 10 == 0 and i ~= -50 and i ~= 50 then
-			addText("1 0", Vector3(40, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("1 0", Vector3(40, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("2 0", Vector3(30, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("2 0", Vector3(30, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("3 0", Vector3(20, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("3 0", Vector3(20, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("4 0", Vector3(10, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("4 0", Vector3(10, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("5 0", Vector3(0, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("5 0", Vector3(0, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("4 0", Vector3(-10, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("4 0", Vector3(-10, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("3 0", Vector3(-20, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("3 0", Vector3(-20, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("2 0", Vector3(-30, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("2 0", Vector3(-30, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-			addText("1 0", Vector3(-40, 0.01, width * -1 + 5), Vector3(-90, 0, 180), 20,"WHITE")
-			addText("1 0", Vector3(-40, 0.01, -5), Vector3(-90, 0, 0), 20, "WHITE")
-		end
-	end
-
-	drawPlane(0, .5, 120, .5, "WHITE")
-	drawPlane(0, width * -1, 120, .5, "WHITE")
-	drawPlane(-60.5, .5, 1, width + 1, "WHITE")
-	drawPlane(60.5, .5, 1, width + 1, "WHITE")
-	end
-	
-	function Grid(gridSize) -- Function that runs creating the grid
-	stepper = 2.5
-	
-	while stepper >= width * -1 - 2.5 do
-		drawLine(-62.5, stepper, 62.5, stepper, 0.01, "MAGENTA", 0.0075)
-		--drawPlane(0, stepper, 120, 0.01, "PINK", 0.0075)
-		stepper = stepper - gridSize
-	end
-	
-	stepper = -62.5
-	
-	while stepper <= 62.5 do
-		drawLine(stepper, 2.5, stepper, width * -1 - 2.5, 0.01, "MAGENTA", 0.0075)
-		--drawPlane(stepper, 0, 0.01, width, "PINK", 0.0075)
-		stepper = stepper + gridSize
-	end
-end
-	"""
-
 func _ready():
 	for i in [full_node, flat_node, grid_node]:
 		self.add_child(i)
-	load_full_environment()
-	load_flat_environment()
-	show_grid(true)
+	load_environment("res://default/environments/football_stadium.lua", true, true, 0.625)
 
-func load_full_environment() -> void:
-	var err: LuaError = lua.do_string(lua_string)
+var script_config = {
+	"type": "environment"
+}
+
+func load_environment(path: String, full: bool, grid: bool, grid_size: float):
+	lua.do_file(path)
+	if full:
+		load_full_environment(path)
+		if grid:
+			show_grid(path, grid_size)
+	else:
+		load_flat_environment(path)
+		if grid:
+			show_grid(path, grid_size)
+
+
+func load_full_environment(path: String) -> void:
+	var err: LuaError = lua.do_file(path)
 	if err is LuaError:
 		print("ERROR %d: %s" % [err.type, err.message])
 		return
 	if lua.function_exists("Full"):
 		var err2 = lua.call_function("Full", [])
+		if err2:
+			print("ERROR %d: %s" % [err2.type, err2.message])
 	else:
 		OS.alert("No Full Function")
 	pass
 
-func load_flat_environment() -> void:
-	var err: LuaError = lua.do_string(lua_string)
+func load_flat_environment(path: String) -> void:
+	var err: LuaError = lua.do_file(path)
 	if err is LuaError:
 		print("ERROR %d: %s" % [err.type, err.message])
 		return
@@ -145,36 +52,37 @@ func load_flat_environment() -> void:
 		OS.alert("No Flat Function")
 	pass
 
-func show_grid(show_grid: bool) -> void:
-	var err: LuaError = lua.do_string(lua_string)
+func show_grid(path: String, grid_size: float) -> void:
+	var err: LuaError = lua.do_file(path)
 	if err is LuaError:
 		print("ERROR %d: %s" % [err.type, err.message])
 		return
 	if lua.function_exists("Grid"):
-		lua.call_function("Grid", [0.625])
+		lua.call_function("Grid", [grid_size])
 	else:
 		OS.alert("No Grid Function")
 	pass
 
 
-
 ## imports and adds a custom mesh to the scene that cannot be interacted with.
-func _add_custom_mesh(path: String,location: Vector3,rotation:Vector3, scale: float = 1):
+func _add_custom_mesh(path: String, location: Vector3, rotation: Vector3, scale: float = 1):
 	var gltf_doc_load = GLTFDocument.new()
 	var gltf_state_load = GLTFState.new()
 	var error = gltf_doc_load.append_from_file(path, gltf_state_load)
 	if error == OK:
 		var gltf_scene_root_node = gltf_doc_load.generate_scene(gltf_state_load)
-		gltf_scene_root_node.scale = Vector3(scale,scale,scale)
+		gltf_scene_root_node.scale = Vector3(scale, scale, scale)
 		gltf_scene_root_node.position = location
 		gltf_scene_root_node.rotation_degrees = rotation
 		full_node.add_child(gltf_scene_root_node)
 	else:
 		OS.alert("Couldn't load glTF scene (error: %s %s)." % [error, error_string(error)])
 
-func _add_image(path: String,location: Vector3,rotation:Vector3, scale: float = 1) -> void:
+func _add_image(path: String, location: Vector3, rotation: Vector3, scale: float = 1) -> void:
 	var ent = Sprite3D.new()
 	var image = Image.load_from_file(path)
+	if image is Texture2D:
+		return OS.alert("Error Importing Image.")
 	var err = image.generate_mipmaps()
 	if err != OK:
 		return OS.alert("Error Generating Image 3D MipMaps.")
@@ -185,7 +93,7 @@ func _add_image(path: String,location: Vector3,rotation:Vector3, scale: float = 
 	full_node.add_child(ent)
 
 ## Add a text object to the scene
-func _add_text(text, location: Vector3, rotation:Vector3, scale: float = 1, col: String = "WHITE"):
+func _add_text(text, location: Vector3, rotation: Vector3, scale: float = 1, col: String = "WHITE"):
 	var ent = CSGMesh3D.new()
 	var mesh = TextMesh.new()
 	mesh.text = str(text)
@@ -194,17 +102,17 @@ func _add_text(text, location: Vector3, rotation:Vector3, scale: float = 1, col:
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(col)
 	ent.material = mat
-	ent.scale = Vector3(scale,scale,scale)
+	ent.scale = Vector3(scale, scale, scale)
 	ent.cast_shadow = false
 	ent.position = location
 	ent.rotation_degrees = rotation
 	full_node.add_child(ent)
 
 ## Draws a Box Shape to the scene
-func _draw_plane(x: float,y: float,l: float,w: float, col: String = "WHITE",z: float = 0.01):
+func _draw_plane(x: float, y: float, l: float, w: float, col: String = "WHITE", z: float = 0.01):
 	var ent = CSGMesh3D.new()
 	var mesh = PlaneMesh.new()
-	mesh.size = Vector2(l,w)
+	mesh.size = Vector2(l, w)
 	ent.mesh = mesh
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(col)
@@ -214,10 +122,10 @@ func _draw_plane(x: float,y: float,l: float,w: float, col: String = "WHITE",z: f
 	full_node.add_child(ent)
 
 ## Draws a box shape to the scene, is base of editing area
-func _draw_ground_plane(x: float,y: float,l: float,w: float,col: String = "WHITE"):
+func _draw_ground_plane(x: float, y: float, l: float, w: float, col: String = "WHITE"):
 	var ent = CSGMesh3D.new()
 	var mesh = PlaneMesh.new()
-	mesh.size = Vector2(l,w)
+	mesh.size = Vector2(l, w)
 	ent.mesh = mesh
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(col)
@@ -226,10 +134,10 @@ func _draw_ground_plane(x: float,y: float,l: float,w: float,col: String = "WHITE
 	full_node.add_child(ent)
 
 ## Draws a plane below the ground plane
-func _draw_sub_plane(l: float,w: float,col: String = "WHITE"):
+func _draw_sub_plane(l: float, w: float, col: String = "WHITE"):
 	var ent = CSGMesh3D.new()
 	var mesh = PlaneMesh.new()
-	mesh.size = Vector2(l,w)
+	mesh.size = Vector2(l, w)
 	ent.mesh = mesh
 	ent.cast_shadow = false
 	var mat = StandardMaterial3D.new()
@@ -256,18 +164,47 @@ func _add_sky_environment(light_rotation: Vector3):
 	full_node.add_child(world_env)
 	full_node.add_child(dir_light)
 
+func _add_flat_environment(color: String):
+	var world_env = WorldEnvironment.new()
+	var env = Environment.new()
+	
+	world_env.environment = env
+	
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(color)
+	
+	full_node.add_child(world_env)
+
 func _draw_line(ax, ay, bx, by, thickness: float, col: String = "WHITE", height: float = 0.01) -> void:
 	var ent = CSGMesh3D.new()
 	var mesh = PlaneMesh.new()
-	var length = sqrt(pow((bx - ax),2) + pow((by - ay),2))
-	mesh.size = Vector2(length,thickness)
+	var length = sqrt(pow((bx - ax), 2) + pow((by - ay), 2))
+	mesh.size = Vector2(length, thickness)
 	ent.mesh = mesh
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = Color(col)
 	ent.material = mat
 	ent.cast_shadow = false
-	var avg_pos = (Vector2(ax,ay) + Vector2(bx,by)) / 2
+	var avg_pos = (Vector2(ax, ay) + Vector2(bx, by)) / 2
 	var radians = atan2(by - avg_pos.y, bx - avg_pos.x)
-	ent.rotation_degrees = Vector3(0,rad_to_deg(radians),0)
+	ent.rotation_degrees = Vector3(0, rad_to_deg(radians), 0)
 	ent.position = Vector3(avg_pos.x, height, avg_pos.y)
+	flat_node.add_child(ent)
+
+
+func _draw_grid_line(ax, ay, bx, by,thickness = 0.01,color: String = "MAGENTA", scale: float = 1) -> void:
+	var ent = CSGMesh3D.new()
+	var mesh = PlaneMesh.new()
+	var length = sqrt(pow((bx - ax), 2) + pow((by - ay), 2))
+	mesh.size = Vector2(length, thickness * scale)
+	ent.mesh = mesh
+	ent.set_script(load("res://core/classes/dot_flow_environment_grid_line.gd"))
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(color)
+	ent.material = mat
+	ent.cast_shadow = false
+	var avg_pos = (Vector2(ax, ay) + Vector2(bx, by)) / 2
+	var radians = atan2(by - avg_pos.y, bx - avg_pos.x)
+	ent.rotation_degrees = Vector3(0, rad_to_deg(radians), 0)
+	ent.position = Vector3(avg_pos.x, 0.075, avg_pos.y)
 	flat_node.add_child(ent)

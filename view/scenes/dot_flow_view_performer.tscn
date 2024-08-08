@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkvewokj6dssf"]
+
+[ext_resource type="PackedScene" uid="uid://cqi48e7pn1p7e" path="res://imports/basic_performer.glb" id="1_jnvlf"]
+
+[node name="DotFlowViewPerformer" type="Node3D"]
+
+[node name="basic_performer" parent="." instance=ExtResource("1_jnvlf")]

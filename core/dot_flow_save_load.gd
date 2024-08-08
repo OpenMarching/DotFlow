@@ -3,7 +3,7 @@ extends Node
 
 
 func quit_editor():
-	if DFCore.open_show != null:
+	if DFCore.open_show == null:
 		get_tree().quit(0)
 	else:
 		var dialog = ConfirmationDialog.new()

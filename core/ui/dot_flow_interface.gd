@@ -56,9 +56,16 @@ func _build_base_menu():
 	DFInterface.add_menu_option("File", "Open Show")
 	DFInterface.add_menu_option("File", "Exit Editor")
 	
+	DFInterface.add_menu_option("Edit", "Full Environment")
+	DFInterface.add_menu_option("Edit", "Flat Environment")
+	DFInterface.add_menu_option("Edit", "Paper View")
+	DFInterface.add_menu_option("Edit", "Toggle Grid")
+	
 	DFInterface.add_menu_option("Connect", "OpenMarching")
 	
 	DFInterface.add_menu_option("Advanced", "Restart Editor")
+	DFInterface.add_menu_option("Advanced", "Audit/ Update Config")
+	DFInterface.add_menu_option("Advanced", "Dump and Rebuild Config")
 
 
 func _base_menu_handle(menu, option):
@@ -71,9 +78,24 @@ func _base_menu_handle(menu, option):
 	if menu == "File" and option == "Exit Editor":
 		DFSaveLoad.quit_editor()
 	
+	if menu == "Edit" and option == "Full Environment":
+		DFEnvironment.set_environment_type(DFEnvironment.EnvironmentType.FULL)
+	if menu == "Edit" and option == "Flat Environment":
+		DFEnvironment.set_environment_type(DFEnvironment.EnvironmentType.FLAT)
+	if menu == "Edit" and option == "Paper View":
+		DFEnvironment.set_environment_type(DFEnvironment.EnvironmentType.PAPER)
+	if menu == "Edit" and option == "Toggle Grid":
+		var val = not DFEnvironment.grid_node.visible
+		DFConfiguration.update_value("grid", "enabled", val)
+		DFEnvironment.grid_node.visible = val
+	
 	if menu == "Connect" and option == "OpenMarching":
 		OS.shell_open("https://openmarching.org/")
 	
 	if menu == "Advanced" and option == "Restart Editor":
 		OS.shell_open(OS.get_executable_path())
 		get_tree().quit(0)
+	if menu == "Advanced" and option == "Audit/ Update Config":
+		DFConfiguration._audit_and_update_config()
+	if menu == "Advanced" and option == "Dump and Rebuild Config":
+		DFConfiguration._dump_and_rebuild_config()

@@ -37,6 +37,9 @@ Open Marching is an organization, dedicated to creating and curating, Free and O
 
 > **Open Marching Products**
 >
-> * [DotFlow](https://github.com/OpenMarching/DotFlow) - Drill Writing and Visualization Software
+> * [DotFlow](https://github.com/OpenMarching/DotFlow) <sup>**!**</sup> - Drill Writing and Visualization Software
+>   
+>  <sub>**!** - Early Development Status. No PRs will be accepted until this status lapses.</sub>
+
 
 <sub>More Information at [openmarching.org](https://openmarching.org/).</sub>

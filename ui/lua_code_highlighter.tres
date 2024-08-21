@@ -1,0 +1,8 @@
+[gd_resource type="CodeHighlighter" load_steps=2 format=3 uid="uid://cydwcg5hfikx"]
+
+[sub_resource type="GDScript" id="GDScript_xmo4e"]
+script/source = "func _ready():
+	"
+
+[resource]
+script = SubResource("GDScript_xmo4e")

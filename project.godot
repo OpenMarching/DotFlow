@@ -12,8 +12,11 @@ config_version=5
 
 config/name="DotFlow"
 config/tags=PackedStringArray("open_marching")
+run/main_scene="res://core/core_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://textures/DotFlowLogoWithText256.png"
+boot_splash/fullsize=false
+config/icon="res://textures/DotFlowLogo.svg"
 
 [input]
 

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c784m27t2m8ru"]
+
+[ext_resource type="Script" path="res://dotflow/viewports/3d_editor/3d_editor.gd" id="1_t6icd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4bst4"]
+
+[sub_resource type="Sky" id="Sky_mg46i"]
+sky_material = SubResource("ProceduralSkyMaterial_4bst4")
+
+[sub_resource type="Environment" id="Environment_n08d7"]
+background_mode = 2
+sky = SubResource("Sky_mg46i")
+
+[node name="3dEditor" type="Node3D"]
+script = ExtResource("1_t6icd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.68052)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693539, 0.354617, 1.47718)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.638642, 0.416442, -0.64708, -0.544009, 0.839074, 0.00308863, 0.544234, 0.350045, 0.762416, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n08d7")

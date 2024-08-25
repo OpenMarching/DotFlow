@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://be6o37mneu7me"]
+
+[ext_resource type="Script" path="res://dotflow/viewports/2d_editor/2d_editor.gd" id="1_gu8ed"]
+[ext_resource type="Texture2D" uid="uid://dfwguua2ik43t" path="res://textures/DotFlowLogo1024.png" id="2_ly5e2"]
+
+[node name="2dEditor" type="Node2D"]
+script = ExtResource("1_gu8ed")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(589, 312)
+scale = Vector2(0.222656, 0.222656)
+texture = ExtResource("2_ly5e2")

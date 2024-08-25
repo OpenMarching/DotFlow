@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bthjtqm5vgxiw"]
+
+[ext_resource type="Script" path="res://start.gd" id="1_hb52s"]
+[ext_resource type="Texture2D" uid="uid://dae5rihx4jqxq" path="res://icon.svg" id="2_tjplh"]
+[ext_resource type="FontFile" uid="uid://cjh726v7tgjp" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="3_t0tac"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hb52s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_tjplh")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_t0tac")
+text = "Powered By Godot"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4

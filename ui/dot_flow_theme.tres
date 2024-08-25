@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://byybas1pqtudt"]
+
+[ext_resource type="FontFile" uid="uid://dkgol3mmhvpsg" path="res://fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf" id="1_j61sv"]
+[ext_resource type="FontFile" uid="uid://cjh726v7tgjp" path="res://fonts/Ubuntu/Ubuntu-Regular.ttf" id="2_lm53o"]
+
+[resource]
+CodeEdit/fonts/font = ExtResource("1_j61sv")
+Fonts/fonts/large = ExtResource("2_lm53o")
+Fonts/fonts/normal = ExtResource("2_lm53o")

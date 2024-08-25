@@ -12,17 +12,11 @@ config_version=5
 
 config/name="DotFlow"
 config/tags=PackedStringArray("open_marching")
-run/main_scene="res://core/3d_core.tscn"
+run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/image="res://textures/DotFlowLogoWithText256.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
-
-[autoload]
-
-DFCore="*res://core/dot_flow_core.gd"
-DFScripter="*res://core/dot_flow_scripter.gd"
-DFEnvironment="*res://core/dot_flow_environment.gd"
-Utils="*res://core/utils/utils.gd"
-DFCamera="*res://core/classes/dot_flow_camera.gd"
 
 [input]
 

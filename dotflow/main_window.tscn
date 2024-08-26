@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://vcy5oo03pax"]
+[gd_scene load_steps=11 format=3 uid="uid://vcy5oo03pax"]
 
 [ext_resource type="Theme" uid="uid://byybas1pqtudt" path="res://ui/dot_flow_theme.tres" id="1_4vjje"]
 [ext_resource type="Script" path="res://dotflow/main_window.gd" id="1_pnxs0"]
 [ext_resource type="Script" path="res://dotflow/menus/file.gd" id="2_3tn72"]
 [ext_resource type="PackedScene" uid="uid://c784m27t2m8ru" path="res://dotflow/viewports/3d_editor/3d_editor.tscn" id="2_4007d"]
 [ext_resource type="PackedScene" uid="uid://be6o37mneu7me" path="res://dotflow/viewports/2d_editor/2d_editor.tscn" id="3_1ptl0"]
+[ext_resource type="Script" path="res://dotflow/menus/edit.gd" id="3_c0nam"]
 [ext_resource type="Script" path="res://dotflow/menus/camera.gd" id="3_nmvyh"]
 [ext_resource type="Script" path="res://dotflow/menus/help.gd" id="3_tw4mc"]
 [ext_resource type="PackedScene" uid="uid://dt0ud7camvste" path="res://dotflow/viewports/paper/paper.tscn" id="5_f5pgd"]
+[ext_resource type="PackedScene" uid="uid://b66b0e4drqbrr" path="res://dotflow/viewports/scripter/scripter.tscn" id="9_tlnw4"]
 
 [node name="MainWindow" type="Control"]
 layout_mode = 3
@@ -44,8 +46,9 @@ script = ExtResource("2_3tn72")
 [node name="Edit" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 title = "File"
 item_count = 1
-item_0/text = "New Show"
+item_0/text = "Data Folder"
 item_0/id = 0
+script = ExtResource("3_c0nam")
 
 [node name="Tools" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 
@@ -74,20 +77,37 @@ script = ExtResource("3_tw4mc")
 [node name="TabBar" type="TabBar" parent="VBoxContainer/MenuBar"]
 layout_mode = 2
 size_flags_horizontal = 3
-tab_count = 4
+tab_count = 5
 tab_alignment = 2
 tab_0/title = "2D Editor"
 tab_1/title = "3D Editor"
 tab_2/title = "Paper"
 tab_3/title = "Preview"
+tab_4/title = "Scripter"
+tab_4/disabled = true
 
-[node name="Panels" type="Panel" parent="VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HSplitContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panels" type="Panel" parent="VBoxContainer/HSplitContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_4vjje")
 
-[node name="2D Editor" type="SubViewportContainer" parent="VBoxContainer/Panels"]
+[node name="2D Editor" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -97,14 +117,14 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="view" type="SubViewport" parent="VBoxContainer/Panels/2D Editor"]
+[node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/2D Editor"]
 handle_input_locally = false
-size = Vector2i(1152, 613)
+size = Vector2i(1152, 578)
 render_target_update_mode = 0
 
-[node name="2dEditor" parent="VBoxContainer/Panels/2D Editor/view" instance=ExtResource("3_1ptl0")]
+[node name="2dEditor" parent="VBoxContainer/HSplitContainer/Panels/2D Editor/view" instance=ExtResource("3_1ptl0")]
 
-[node name="3D Editor" type="SubViewportContainer" parent="VBoxContainer/Panels"]
+[node name="3D Editor" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -114,15 +134,15 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="view" type="SubViewport" parent="VBoxContainer/Panels/3D Editor"]
+[node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/3D Editor"]
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1152, 613)
+size = Vector2i(1152, 578)
 render_target_update_mode = 0
 
-[node name="3dEditor" parent="VBoxContainer/Panels/3D Editor/view" instance=ExtResource("2_4007d")]
+[node name="3dEditor" parent="VBoxContainer/HSplitContainer/Panels/3D Editor/view" instance=ExtResource("2_4007d")]
 
-[node name="Paper" type="SubViewportContainer" parent="VBoxContainer/Panels"]
+[node name="Paper" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,14 +151,14 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="view" type="SubViewport" parent="VBoxContainer/Panels/Paper"]
+[node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Paper"]
 handle_input_locally = false
-size = Vector2i(1152, 613)
+size = Vector2i(1152, 578)
 render_target_update_mode = 4
 
-[node name="Paper" parent="VBoxContainer/Panels/Paper/view" instance=ExtResource("5_f5pgd")]
+[node name="Paper" parent="VBoxContainer/HSplitContainer/Panels/Paper/view" instance=ExtResource("5_f5pgd")]
 
-[node name="Preview" type="SubViewportContainer" parent="VBoxContainer/Panels"]
+[node name="Preview" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -148,11 +168,35 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="view" type="SubViewport" parent="VBoxContainer/Panels/Preview"]
+[node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Preview"]
 handle_input_locally = false
-size = Vector2i(1152, 613)
+size = Vector2i(1152, 578)
 render_target_update_mode = 0
 
+[node name="Scripter" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Scripter"]
+handle_input_locally = false
+size = Vector2i(1152, 578)
+render_target_update_mode = 0
+
+[node name="Scripter" parent="VBoxContainer/HSplitContainer/Panels/Scripter/view" instance=ExtResource("9_tlnw4")]
+
+[node name="TabBar" type="TabBar" parent="VBoxContainer"]
+layout_mode = 2
+tab_count = 2
+tab_0/title = "Output"
+tab_1/title = "Timeline"
+
+[connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Edit" to="VBoxContainer/MenuBar/MenuBar/Edit" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Camera" to="VBoxContainer/MenuBar/MenuBar/Camera" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Help" to="VBoxContainer/MenuBar/MenuBar/Help" method="_on_id_pressed"]
 [connection signal="tab_clicked" from="VBoxContainer/MenuBar/TabBar" to="." method="_on_editor_tab_changed"]

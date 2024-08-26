@@ -18,6 +18,10 @@ boot_splash/image="res://textures/DotFlowLogoWithText256.png"
 boot_splash/fullsize=false
 config/icon="res://textures/DotFlowLogo.svg"
 
+[autoload]
+
+DotFlow="*res://dotflow/dot_flow_global.gd"
+
 [gui]
 
 theme/custom="res://ui/dot_flow_theme.tres"

@@ -9,10 +9,14 @@ func _on_editor_tab_changed(tab):
 	
 	var selected = $VBoxContainer/MenuBar/TabBar.get_tab_title(tab)
 	if selected == "2D Editor":
+		DotFlow.state.active_tab = DotFlowState.WindowTabs.TWO_EDITOR
 		$"VBoxContainer/Panels/2D Editor".visible = true
 	if selected == "3D Editor":
 		$"VBoxContainer/Panels/3D Editor".visible = true
+		DotFlow.state.active_tab = DotFlowState.WindowTabs.THREE_EDITOR
 	if selected == "Paper":
 		$VBoxContainer/Panels/Paper.visible = true
+		DotFlow.state.active_tab = DotFlowState.WindowTabs.PAPER
 	if selected == "Preview":
 		$VBoxContainer/Panels/Preview.visible = true
+		DotFlow.state.active_tab = DotFlowState.WindowTabs.PREVIEW

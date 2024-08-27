@@ -1,9 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://cor41krkw20ry"]
+[gd_scene load_steps=3 format=3 uid="uid://cor41krkw20ry"]
 
 [ext_resource type="Script" path="res://dotflow/widgets/timeline/timeline_measure.gd" id="1_lguae"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_445ye"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_width_left = 2
+border_color = Color(1, 1, 1, 1)
+
 [node name="TimelineMeasure" type="PanelContainer"]
-custom_minimum_size = Vector2(80, 0)
-size_flags_horizontal = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_445ye")
 script = ExtResource("1_lguae")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Test Something Or Other"
+vertical_alignment = 2

@@ -22,10 +22,6 @@ config/icon="res://textures/DotFlowLogo.svg"
 
 DotFlow="*res://dotflow/dot_flow_global.gd"
 
-[display]
-
-window/stretch/scale=2.0
-
 [gui]
 
 theme/custom="res://ui/dot_flow_theme.tres"

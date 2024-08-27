@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vcy5oo03pax"]
+[gd_scene load_steps=14 format=3 uid="uid://vcy5oo03pax"]
 
 [ext_resource type="Theme" uid="uid://byybas1pqtudt" path="res://ui/dot_flow_theme.tres" id="1_4vjje"]
 [ext_resource type="Script" path="res://dotflow/main_window.gd" id="1_pnxs0"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://dotflow/menus/help.gd" id="3_tw4mc"]
 [ext_resource type="PackedScene" uid="uid://dt0ud7camvste" path="res://dotflow/viewports/paper/paper.tscn" id="5_f5pgd"]
 [ext_resource type="PackedScene" uid="uid://b66b0e4drqbrr" path="res://dotflow/viewports/scripter/scripter.tscn" id="9_tlnw4"]
+[ext_resource type="Texture2D" uid="uid://cfqya7ly3nbrl" path="res://addons/lucide/icons/panel-bottom-open.svg" id="11_tn6wr"]
+[ext_resource type="Texture2D" uid="uid://oskicwc4ul2n" path="res://addons/lucide/icons/panel-bottom-close.svg" id="12_05any"]
+[ext_resource type="Texture2D" uid="uid://cljb2opi08v0f" path="res://addons/lucide/icons/panel-bottom.svg" id="12_av6x7"]
 
 [node name="MainWindow" type="Control"]
 layout_mode = 3
@@ -38,16 +41,10 @@ prefer_global_menu = false
 
 [node name="File" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 title = "File"
-item_count = 1
-item_0/text = "New Show"
-item_0/id = 0
 script = ExtResource("2_3tn72")
 
 [node name="Edit" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 title = "File"
-item_count = 1
-item_0/text = "Data Folder"
-item_0/id = 0
 script = ExtResource("3_c0nam")
 
 [node name="Tools" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
@@ -119,7 +116,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/2D Editor"]
 handle_input_locally = false
-size = Vector2i(1152, 578)
+size = Vector2i(1152, 577)
 render_target_update_mode = 0
 
 [node name="2dEditor" parent="VBoxContainer/HSplitContainer/Panels/2D Editor/view" instance=ExtResource("3_1ptl0")]
@@ -137,7 +134,7 @@ stretch = true
 [node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/3D Editor"]
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1152, 578)
+size = Vector2i(1152, 577)
 render_target_update_mode = 0
 
 [node name="3dEditor" parent="VBoxContainer/HSplitContainer/Panels/3D Editor/view" instance=ExtResource("2_4007d")]
@@ -153,7 +150,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Paper"]
 handle_input_locally = false
-size = Vector2i(1152, 578)
+size = Vector2i(1152, 577)
 render_target_update_mode = 4
 
 [node name="Paper" parent="VBoxContainer/HSplitContainer/Panels/Paper/view" instance=ExtResource("5_f5pgd")]
@@ -170,7 +167,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Preview"]
 handle_input_locally = false
-size = Vector2i(1152, 578)
+size = Vector2i(1152, 577)
 render_target_update_mode = 0
 
 [node name="Scripter" type="SubViewportContainer" parent="VBoxContainer/HSplitContainer/Panels"]
@@ -185,16 +182,29 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/HSplitContainer/Panels/Scripter"]
 handle_input_locally = false
-size = Vector2i(1152, 578)
+size = Vector2i(1152, 577)
 render_target_update_mode = 0
 
 [node name="Scripter" parent="VBoxContainer/HSplitContainer/Panels/Scripter/view" instance=ExtResource("9_tlnw4")]
 
-[node name="TabBar" type="TabBar" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-tab_count = 2
+
+[node name="TabBar" type="TabBar" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tab_count = 3
 tab_0/title = "Output"
 tab_1/title = "Timeline"
+tab_2/title = "Console"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("11_tn6wr")
+theme_override_icons/checked_disabled = ExtResource("12_av6x7")
+theme_override_icons/unchecked = ExtResource("12_05any")
+theme_override_icons/unchecked_disabled = ExtResource("12_av6x7")
+flat = true
 
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Edit" to="VBoxContainer/MenuBar/MenuBar/Edit" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Camera" to="VBoxContainer/MenuBar/MenuBar/Camera" method="_on_id_pressed"]

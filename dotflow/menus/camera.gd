@@ -1,4 +1,4 @@
-extends Node
+extends PopupMenu
 
 
 func _on_id_pressed(id):

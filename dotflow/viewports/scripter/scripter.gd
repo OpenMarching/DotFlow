@@ -5,7 +5,7 @@ var dir = DirAccess.open("user://")
 signal open_files_changed
 
 @onready var tree: Tree = $HSplitContainer/Tree
-var directory = "user://scripts"
+var directory = "user://"
 var root
 
 @onready var tabbar: TabBar = $HSplitContainer/VBoxContainer/HBoxContainer/TabBar
@@ -28,7 +28,6 @@ func _remove_editing_file(item: FileEdit):
 	code.text = ""
 
 func _ready():
-	OS.shell_open(OS.get_user_data_dir())
 	root = tree.create_item()
 	add_files_to_tree(directory, root)
 	open_files_changed.connect(_refresh_editors)
@@ -40,6 +39,8 @@ func _refresh_editors():
 
 func add_files_to_tree(directory, parent_node):
 	var fs = DirAccess.open(directory)
+	if not fs.dir_exists("scripts"):
+		fs.make_dir("scripts")
 	var files = fs.get_files()
 	var dirs = fs.get_directories()
 

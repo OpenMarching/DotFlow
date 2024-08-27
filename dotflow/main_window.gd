@@ -2,6 +2,7 @@ extends Control
 
 func _ready():
 	_on_editor_tab_changed($VBoxContainer/MenuBar/TabBar.current_tab)
+	$VBoxContainer/VSplitContainer.offset_top = 100
 
 func _on_editor_tab_changed(tab):
 	for i in $VBoxContainer/VSplitContainer/HSplitContainer/Panels.get_children():
@@ -26,4 +27,4 @@ func _on_editor_tab_changed(tab):
 
 
 func _on_panel_toggle_toggled(toggled_on):
-	$VBoxContainer/VSplitContainer/Panel.visible = not $VBoxContainer/VSplitContainer/Panel.visible 
+	$VBoxContainer/VSplitContainer/Panel.visible = toggled_on

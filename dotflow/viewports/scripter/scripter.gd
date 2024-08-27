@@ -5,7 +5,7 @@ var dir = DirAccess.open("user://")
 signal open_files_changed
 
 @onready var tree: Tree = $HSplitContainer/Tree
-var directory = "user://"
+var directory = "user://scripts"
 var root
 
 @onready var tabbar: TabBar = $HSplitContainer/VBoxContainer/HBoxContainer/TabBar
@@ -39,8 +39,8 @@ func _refresh_editors():
 
 func add_files_to_tree(directory, parent_node):
 	var fs = DirAccess.open(directory)
-	if not fs.dir_exists("scripts"):
-		fs.make_dir("scripts")
+	if not fs.dir_exists("user://scripts"):
+		fs.make_dir("user://scripts")
 	var files = fs.get_files()
 	var dirs = fs.get_directories()
 
@@ -82,7 +82,7 @@ class FileEdit:
 
 func _set_editor_settings(editor: CodeEdit) -> CodeEdit:
 	editor.line_folding = true
-	editor.gutters_draw_line_numbers
+	editor.gutters_draw_line_numbers = true
 	editor.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	return editor
 

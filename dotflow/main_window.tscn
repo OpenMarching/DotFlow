@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vcy5oo03pax"]
+[gd_scene load_steps=16 format=3 uid="uid://vcy5oo03pax"]
 
 [ext_resource type="Theme" uid="uid://byybas1pqtudt" path="res://ui/dot_flow_theme.tres" id="1_4vjje"]
 [ext_resource type="Script" path="res://dotflow/main_window.gd" id="1_pnxs0"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b66b0e4drqbrr" path="res://dotflow/viewports/scripter/scripter.tscn" id="9_tlnw4"]
 [ext_resource type="PackedScene" uid="uid://d2hoqar47bp2u" path="res://dotflow/widgets/timeline/timeline.tscn" id="11_4d1ih"]
 [ext_resource type="Texture2D" uid="uid://cfqya7ly3nbrl" path="res://addons/lucide/icons/panel-bottom-open.svg" id="11_tn6wr"]
+[ext_resource type="PackedScene" uid="uid://cwy2mmd2xwtbb" path="res://dotflow/widgets/playback_controls/playback_controls.tscn" id="12_4snb0"]
 [ext_resource type="Texture2D" uid="uid://oskicwc4ul2n" path="res://addons/lucide/icons/panel-bottom-close.svg" id="12_05any"]
 [ext_resource type="Texture2D" uid="uid://cljb2opi08v0f" path="res://addons/lucide/icons/panel-bottom.svg" id="12_av6x7"]
 
@@ -82,11 +83,11 @@ tab_1/title = "3D Editor"
 tab_2/title = "Paper"
 tab_3/title = "Preview"
 tab_4/title = "Scripter"
-tab_4/disabled = true
 
 [node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/autohide = 0
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/VSplitContainer"]
 layout_mode = 2
@@ -121,7 +122,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/2D Editor"]
 handle_input_locally = false
-size = Vector2i(1152, 282)
+size = Vector2i(1152, 465)
 render_target_update_mode = 0
 
 [node name="2dEditor" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/2D Editor/view" instance=ExtResource("3_1ptl0")]
@@ -139,7 +140,7 @@ stretch = true
 [node name="view" type="SubViewport" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/3D Editor"]
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1152, 282)
+size = Vector2i(1152, 465)
 render_target_update_mode = 0
 
 [node name="3dEditor" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/3D Editor/view" instance=ExtResource("2_4007d")]
@@ -155,7 +156,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/Paper"]
 handle_input_locally = false
-size = Vector2i(1152, 282)
+size = Vector2i(1152, 465)
 render_target_update_mode = 4
 
 [node name="Paper" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/Paper/view" instance=ExtResource("5_f5pgd")]
@@ -172,7 +173,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/Preview"]
 handle_input_locally = false
-size = Vector2i(1152, 282)
+size = Vector2i(1152, 465)
 render_target_update_mode = 0
 
 [node name="Scripter" type="SubViewportContainer" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels"]
@@ -187,7 +188,7 @@ stretch = true
 
 [node name="view" type="SubViewport" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/Scripter"]
 handle_input_locally = false
-size = Vector2i(1152, 282)
+size = Vector2i(1152, 465)
 render_target_update_mode = 0
 
 [node name="Scripter" parent="VBoxContainer/VSplitContainer/HSplitContainer/Panels/Scripter/view" instance=ExtResource("9_tlnw4")]
@@ -195,7 +196,6 @@ render_target_update_mode = 0
 [node name="Panel" type="Panel" parent="VBoxContainer/VSplitContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Timeline" parent="VBoxContainer/VSplitContainer/Panel" instance=ExtResource("11_4d1ih")]
 layout_mode = 1
@@ -211,13 +211,20 @@ tab_0/title = "Output"
 tab_1/title = "Timeline"
 tab_2/title = "Console"
 
+[node name="PlaybackControls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("12_4snb0")]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="PanelToggle" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Toggle Bottom Panel"
 focus_mode = 0
 theme_override_icons/checked = ExtResource("11_tn6wr")
 theme_override_icons/checked_disabled = ExtResource("12_av6x7")
 theme_override_icons/unchecked = ExtResource("12_05any")
 theme_override_icons/unchecked_disabled = ExtResource("12_av6x7")
+button_pressed = true
 flat = true
 
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Edit" to="VBoxContainer/MenuBar/MenuBar/Edit" method="_on_id_pressed"]

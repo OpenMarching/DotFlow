@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwy2mmd2xwtbb"]
+
+[ext_resource type="Script" path="res://dotflow/widgets/playback_controls/playback_controls.gd" id="1_ukjln"]
+[ext_resource type="Texture2D" uid="uid://b5kn0p8ahuec3" path="res://addons/lucide/icons/chevron-first.svg" id="2_a2up8"]
+[ext_resource type="Texture2D" uid="uid://dlamrq7ad7rs5" path="res://addons/lucide/icons/circle-play.svg" id="2_fg1c2"]
+[ext_resource type="Texture2D" uid="uid://c46yku2d3pq87" path="res://addons/lucide/icons/circle-pause.svg" id="3_cjugt"]
+[ext_resource type="Texture2D" uid="uid://b2p4easq7rcgw" path="res://addons/lucide/icons/skip-back.svg" id="3_ss83k"]
+[ext_resource type="Texture2D" uid="uid://cfcpbl3an6l87" path="res://addons/lucide/icons/skip-forward.svg" id="6_aor24"]
+
+[node name="PlaybackControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ukjln")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Beginning" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_a2up8")
+flat = true
+
+[node name="Previous" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_ss83k")
+flat = true
+
+[node name="Play" type="CheckButton" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("3_cjugt")
+theme_override_icons/unchecked = ExtResource("2_fg1c2")
+flat = true
+
+[node name="Next" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_aor24")
+flat = true
+
+[node name="TrackTime" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+editable = false
+
+[connection signal="pressed" from="HBoxContainer/Beginning" to="." method="_on_beginning_pressed"]
+[connection signal="toggled" from="HBoxContainer/Play" to="." method="_on_play_toggled"]

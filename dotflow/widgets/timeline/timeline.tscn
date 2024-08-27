@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2hoqar47bp2u"]
+[gd_scene load_steps=4 format=3 uid="uid://d2hoqar47bp2u"]
 
 [ext_resource type="Script" path="res://dotflow/widgets/timeline/timeline.gd" id="1_icl8x"]
+[ext_resource type="Texture2D" uid="uid://b5w10bkt7lfs5" path="res://addons/lucide/icons/chevron-down.svg" id="2_84ti7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae4e1"]
+content_margin_bottom = 2.0
 
 [node name="Timeline" type="Control"]
 layout_mode = 3
@@ -20,17 +24,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+[node name="gui_" type="GridContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ae4e1")
 horizontal_scroll_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Cursor" type="Control" parent="HBoxContainer/ScrollContainer/VBoxContainer/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TimelinePosition" type="TextureRect" parent="HBoxContainer/ScrollContainer/VBoxContainer/Control/Cursor"]
+layout_mode = 1
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("2_84ti7")
+
+[node name="TimeSequence" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="TimelineMeasures" type="HBoxContainer" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
+
+[connection signal="gui_input" from="HBoxContainer/ScrollContainer/VBoxContainer/Control" to="." method="_on_timeline_timetrack_input"]

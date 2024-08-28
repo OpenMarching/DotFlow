@@ -19,3 +19,5 @@ script = ExtResource("1_uu24o")
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 focus_mode = 0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

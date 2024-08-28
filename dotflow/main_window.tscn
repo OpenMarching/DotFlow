@@ -227,6 +227,7 @@ theme_override_icons/unchecked_disabled = ExtResource("12_av6x7")
 button_pressed = true
 flat = true
 
+[connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/File" to="VBoxContainer/MenuBar/MenuBar/File" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Edit" to="VBoxContainer/MenuBar/MenuBar/Edit" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Camera" to="VBoxContainer/MenuBar/MenuBar/Camera" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Help" to="VBoxContainer/MenuBar/MenuBar/Help" method="_on_id_pressed"]

@@ -21,6 +21,7 @@ config/icon="res://textures/DotFlowLogo.svg"
 [autoload]
 
 DotFlow="*res://dotflow/dot_flow_global.gd"
+UtilsArr="*res://dotflow/utils/arr.gd"
 
 [display]
 

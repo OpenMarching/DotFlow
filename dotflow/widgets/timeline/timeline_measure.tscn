@@ -40,5 +40,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qljrk")
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Test Something Or Other"
+text = "8 Counts"
 vertical_alignment = 2

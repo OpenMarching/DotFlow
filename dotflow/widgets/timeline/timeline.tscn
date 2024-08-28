@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="gui_" type="GridContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
@@ -70,5 +70,9 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
+
+[node name="gui_2" type="GridContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [connection signal="gui_input" from="HBoxContainer/ScrollContainer/VBoxContainer/Control" to="." method="_on_timeline_timetrack_input"]

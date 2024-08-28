@@ -33,10 +33,13 @@ func _refresh_timeline():
 		timesec.time = int(i)
 		timetrack.add_child(timesec)
 	
-	for i in DotFlow.show.timeline.get_sets():
+	var timeline_sets: Array[Set] = DotFlow.show.timeline.get_sets()
+	
+	for i in timeline_sets.size():
 		var timeline_item: TimelineMeasure = load("res://dotflow/widgets/timeline/timeline_measure.tscn").instantiate()
-		timeline_item.counts = i.count
-		timeline_item.tempo = i.tempo
+		timeline_item.measure_idx = i
+		timeline_item.counts = timeline_sets[i].count
+		timeline_item.tempo = timeline_sets[i].tempo
 		timeline.add_child(timeline_item)
 
 func _handle_drag(delta: float):

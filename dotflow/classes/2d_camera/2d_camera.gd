@@ -36,5 +36,5 @@ func zoom_out() -> void:
 	_target_zoom = min(_target_zoom + ZOOM_INCREMENT, MAX_ZOOM)
 	set_physics_process(true)
 
-func speed_mult(zoom: float) -> float:
-	return 12**(1-zoom)
+func speed_mult(_zoom: float) -> float:
+	return 12**(1-_zoom)

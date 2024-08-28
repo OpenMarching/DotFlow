@@ -10,6 +10,6 @@ func _ready():
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.button_mask == MOUSE_BUTTON_LEFT:
+		if event.button_mask == MOUSE_BUTTON_RIGHT:
 			var window = load("res://dotflow/windows/update_show_duration/update_show_duration.tscn").instantiate()
 			self.add_child(window)

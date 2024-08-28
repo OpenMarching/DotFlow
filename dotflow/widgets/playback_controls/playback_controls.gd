@@ -37,3 +37,7 @@ func _on_previous_pressed():
 
 func _on_end_pressed():
 	DotFlow.playback.set_playback_to_end()
+
+
+func _on_h_slider_value_changed(value):
+	DotFlow.show.set_player_volume(value)

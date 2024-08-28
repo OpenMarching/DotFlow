@@ -52,7 +52,6 @@ func set_playback_to_prev_set():
 
 
 func set_playback_to_next_set():
-	var current_time: float = get_track_time()
 	var set_times: Array[SetTimes] = DotFlow.show.timeline.get_set_times()
 	if get_current_set_index() + 1 < set_times.size():
 		set_track_time(set_times[get_current_set_index() + 1].start)

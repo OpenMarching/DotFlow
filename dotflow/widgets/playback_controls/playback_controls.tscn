@@ -26,20 +26,30 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.0
+
 [node name="Beginning" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Jump To Beginning"
 focus_mode = 0
 icon = ExtResource("2_a2up8")
 flat = true
 
 [node name="Previous" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Go To Previous Set"
 focus_mode = 0
 icon = ExtResource("3_ss83k")
 flat = true
 
 [node name="Play" type="CheckButton" parent="HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Play/ Pause"
 focus_mode = 0
 theme_override_icons/checked = ExtResource("3_cjugt")
 theme_override_icons/unchecked = ExtResource("2_fg1c2")
@@ -47,12 +57,15 @@ flat = true
 
 [node name="Next" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Go To Next Set"
 focus_mode = 0
 icon = ExtResource("6_aor24")
 flat = true
 
 [node name="End" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Jump To End"
+focus_mode = 0
 icon = ExtResource("7_eujpd")
 flat = true
 
@@ -60,6 +73,7 @@ flat = true
 layout_mode = 2
 editable = false
 
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="HBoxContainer/Beginning" to="." method="_on_beginning_pressed"]
 [connection signal="pressed" from="HBoxContainer/Previous" to="." method="_on_previous_pressed"]
 [connection signal="toggled" from="HBoxContainer/Play" to="." method="_on_play_toggled"]

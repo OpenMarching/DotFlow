@@ -11,15 +11,16 @@ func _process(delta):
 	_handle_drag(delta)
 
 
-func _set_local_time(time: float):
-	timecursor.position.x = time * 50
+func _set_local_time(_time: float):
+	timecursor.position.x = _time * 50
 
 func _ready():
 	DotFlow.playback.track_time_changed.connect(_set_local_time)
 	_refresh_timeline()
 	DotFlow.show.timeline.show_duration_changed.connect(_show_duration_changed)
+	DotFlow.events.timeline_refreshed.connect(_refresh_timeline)
 
-func _show_duration_changed(duration: float):
+func _show_duration_changed(_duration: float):
 	_refresh_timeline()
 
 func _refresh_timeline():
@@ -42,7 +43,7 @@ func _refresh_timeline():
 		timeline_item.tempo = timeline_sets[i].tempo
 		timeline.add_child(timeline_item)
 
-func _handle_drag(delta: float):
+func _handle_drag(_delta: float):
 	if holding_mouse_down:
 		DotFlow.playback.set_track_time(clampf(event_position.x / 50, 0.0, float(DotFlow.show.timeline.get_show_duration())))
 	pass

@@ -37,8 +37,8 @@ func _refresh_editors():
 	for i in open_files:
 		tabbar.add_tab(i.name)
 
-func add_files_to_tree(directory, parent_node):
-	var fs = DirAccess.open(directory)
+func add_files_to_tree(_directory, parent_node):
+	var fs = DirAccess.open(_directory)
 	if not fs.dir_exists("user://scripts"):
 		fs.make_dir("user://scripts")
 	var files = fs.get_files()
@@ -51,10 +51,10 @@ func add_files_to_tree(directory, parent_node):
 		tree_item.set_metadata(0, file_path)
 		tree_item.propagate_check(0, true)
 
-	for dir in dirs:
-		var subdir_path = directory + "/" + dir
+	for _dir in dirs:
+		var subdir_path = directory + "/" + _dir
 		var tree_item = tree.create_item(parent_node)
-		tree_item.set_text(0, dir)
+		tree_item.set_text(0, _dir)
 		tree_item.set_collapsed_recursive(true)
 		tree_item.set_metadata(0, "")
 		add_files_to_tree(subdir_path, tree_item)

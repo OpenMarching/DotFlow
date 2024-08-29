@@ -4,6 +4,14 @@ extends Node
 signal track_time_changed(time: float)
 signal is_playing_changed(playing: bool)
 
+var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+
+func _ready():
+	self.add_child(audio_player)
+	audio_player.stream = DotFlow.show.audio.audio_track
+	DotFlow.playback.is_playing_changed.connect(_playing_changed)
+	set_player_volume(DotFlow.config.get_value("playback", "player_volume"))
+
 var _track_time: float = 0.0:
 	set(value):
 		track_time_changed.emit(value)
@@ -66,3 +74,24 @@ func get_current_set_index() -> int:
 		if current_time >= set_times[i].start and current_time < set_times[i].start + set_times[i].length:
 			return i
 	return -1
+
+func _playing_changed(playing: bool):
+	if playing == true:
+		if get_track_time() < DotFlow.show.audio.audio_track.get_length():
+			_play_track_at(get_track_time())
+		else:
+			printerr("Track Position Exceeds Audio Length.")
+	else:
+		_stop_track()
+
+func _play_track_at(time: float):
+	audio_player.play(time)
+
+func _stop_track():
+	audio_player.stop()
+
+func set_player_volume(volume: float):
+	audio_player.volume_db = linear_to_db(volume)
+
+func get_player_volume() -> float:
+	return db_to_linear(audio_player.volume_db)

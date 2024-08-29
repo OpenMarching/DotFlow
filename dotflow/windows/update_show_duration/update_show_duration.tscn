@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://dotflow/windows/update_show_duration/update_show_duration.gd" id="1_buipa"]
 
 [node name="UpdateShowDuration" type="Window"]
-title = "Update Show Duration"
+title = "Update Show Timing"
 initial_position = 1
-size = Vector2i(300, 180)
+size = Vector2i(300, 300)
 transient = true
 exclusive = true
 script = ExtResource("1_buipa")
@@ -21,7 +21,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "New Show Timeline Length"
+text = "Show Length"
 horizontal_alignment = 1
 
 [node name="layout" type="HBoxContainer" parent="VBoxContainer"]
@@ -49,6 +49,30 @@ text = "Seconds"
 [node name="secs" type="SpinBox" parent="VBoxContainer/layout/secs"]
 layout_mode = 2
 max_value = 60.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Initial Set Start Delay"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartDelay" type="SpinBox" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+step = 0.0
+allow_greater = true
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "seconds"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

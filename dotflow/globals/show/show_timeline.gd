@@ -3,6 +3,8 @@ extends Node
 
 signal show_duration_changed(length: int)
 
+var delay_start: float = 10.0
+
 var _sets: Array[Set] = [
 	Set.new(8, 120),
 	Set.new(12, 120),
@@ -38,7 +40,7 @@ func get_sets() -> Array[Set]:
 
 func get_set_times() -> Array[SetTimes]:
 	var arr: Array[SetTimes] = []
-	var start_time: float = 0
+	var start_time: float = 0 + delay_start
 	for i in _sets:
 		var _set = SetTimes.new()
 		_set.start = start_time
@@ -47,3 +49,9 @@ func get_set_times() -> Array[SetTimes]:
 		arr.append(_set)
 	return arr
 
+func get_start_delay() -> float:
+	return delay_start
+
+func set_start_delay(delay: float):
+	delay_start = delay
+	DotFlow.events.timeline_refreshed.emit()

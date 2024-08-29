@@ -9,6 +9,13 @@ var time = 0.0
 
 func _process(delta):
 	_handle_drag(delta)
+	#_follow_timeline_cursor()
+
+
+func _follow_timeline_cursor():
+	if DotFlow.playback.is_playing() and $HBoxContainer/ScrollContainer/VBoxContainer/Control/Cursor.position.x > 300:
+		var offset: float = DotFlow.playback.get_track_time()
+		$HBoxContainer/ScrollContainer.scroll_horizontal = offset * 50 - $HBoxContainer/ScrollContainer.size.x / 2
 
 
 func _set_local_time(_time: float):
@@ -35,6 +42,17 @@ func _refresh_timeline():
 		timetrack.add_child(timesec)
 	
 	var timeline_sets: Array[Set] = DotFlow.show.timeline.get_sets()
+	
+	var audio_track = $HBoxContainer/ScrollContainer/VBoxContainer/AudioTrack
+	for i in audio_track.get_children():
+		i.queue_free()
+	var track_render = load("res://dotflow/widgets/timeline/timeline_track_length.tscn").instantiate()
+	audio_track.add_child(track_render)
+	
+	if DotFlow.show.timeline.delay_start > 0.0:
+		var panel = PanelContainer.new()
+		panel.custom_minimum_size.x = DotFlow.show.timeline.delay_start * 50.0
+		timeline.add_child(panel)
 	
 	for i in timeline_sets.size():
 		var timeline_item: TimelineMeasure = load("res://dotflow/widgets/timeline/timeline_measure.tscn").instantiate()

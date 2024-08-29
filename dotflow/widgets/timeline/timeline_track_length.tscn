@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf7ahk8ba04i6"]
+
+[ext_resource type="Script" path="res://dotflow/widgets/timeline/timeline_track_length.gd" id="1_rtsxq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w555"]
+bg_color = Color(0, 0.784314, 0, 1)
+
+[node name="TimelineTrackLength" type="PanelContainer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6w555")
+script = ExtResource("1_rtsxq")

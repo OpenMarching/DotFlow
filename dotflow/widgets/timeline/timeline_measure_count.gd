@@ -20,7 +20,8 @@ func _on_button_gui_input(event):
 			_set_track_to_location()
 		if event.button_mask == MOUSE_BUTTON_RIGHT:
 			var window = ConfirmationDialog.new()
-			window.dialog_text = "Split This Measure on count %s?" % count
+			window.title = "Split Set"
+			window.dialog_text = "Split This Set on Count %s?" % count
 			window.confirmed.connect(_split_measure)
 			window.visible = true
 			window.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN

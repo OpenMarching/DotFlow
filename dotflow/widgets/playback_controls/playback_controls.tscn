@@ -77,6 +77,14 @@ flat = true
 layout_mode = 2
 editable = false
 
+[node name="TrackTime2" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+editable = false
+
+[node name="TrackTime3" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+editable = false
+
 [connection signal="value_changed" from="HBoxContainer/AudioVolume" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="HBoxContainer/Beginning" to="." method="_on_beginning_pressed"]
 [connection signal="pressed" from="HBoxContainer/Previous" to="." method="_on_previous_pressed"]

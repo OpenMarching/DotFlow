@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2hoqar47bp2u"]
+[gd_scene load_steps=6 format=3 uid="uid://d2hoqar47bp2u"]
 
 [ext_resource type="Script" path="res://dotflow/widgets/timeline/timeline.gd" id="1_icl8x"]
 [ext_resource type="Texture2D" uid="uid://b5w10bkt7lfs5" path="res://addons/lucide/icons/chevron-down.svg" id="2_84ti7"]
+[ext_resource type="Texture2D" uid="uid://duge5sx8bwvb4" path="res://addons/lucide/icons/square-plus.svg" id="3_k0rxk"]
+[ext_resource type="Texture2D" uid="uid://6xamqe2k1pxg" path="res://addons/lucide/icons/square-minus.svg" id="4_m8t00"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae4e1"]
 content_margin_bottom = 2.0
@@ -75,8 +77,29 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="gui_2" type="GridContainer" parent="HBoxContainer"]
+[node name="TimelineZoom" type="VBoxContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
+[node name="ZoomIn" type="Button" parent="HBoxContainer/TimelineZoom"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("3_k0rxk")
+
+[node name="ZoomSlider" type="VSlider" parent="HBoxContainer/TimelineZoom"]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+min_value = 10.0
+step = 10.0
+value = 50.0
+
+[node name="ZoomOut" type="Button" parent="HBoxContainer/TimelineZoom"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("4_m8t00")
+
 [connection signal="gui_input" from="HBoxContainer/ScrollContainer/VBoxContainer/Control" to="." method="_on_timeline_timetrack_input"]
+[connection signal="pressed" from="HBoxContainer/TimelineZoom/ZoomIn" to="." method="_zoom_in"]
+[connection signal="drag_ended" from="HBoxContainer/TimelineZoom/ZoomSlider" to="." method="_on_zoom_slider_drag_ended"]
+[connection signal="pressed" from="HBoxContainer/TimelineZoom/ZoomOut" to="." method="_zoom_out"]

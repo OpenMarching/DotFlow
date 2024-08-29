@@ -1,9 +1,11 @@
 class_name DotFlowPlayback
 extends Node
+## Global Playback manager for DotFlow
 
 signal track_time_changed(time: float)
 signal is_playing_changed(playing: bool)
 
+## Player for the audio track assigned in the show.
 var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
 func _ready():
@@ -31,6 +33,11 @@ func get_track_time() -> float:
 func set_track_time(time: float) -> void:
 	if is_playing():
 		pause()
+	_track_time = time
+
+## prefer to use [code]set_track_time()[/code]
+## This function is used to force update the track time and continue playback.
+func _set_track_time_force(time: float) -> void:
 	_track_time = time
 
 func play() -> void:
@@ -95,3 +102,4 @@ func set_player_volume(volume: float):
 
 func get_player_volume() -> float:
 	return db_to_linear(audio_player.volume_db)
+	

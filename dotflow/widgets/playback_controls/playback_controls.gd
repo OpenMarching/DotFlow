@@ -13,7 +13,20 @@ func _is_playing_changed(is_playing: bool):
 
 func _track_time_changed(time: float):
 	$HBoxContainer/TrackTime.text = str("%.04f" % time)
+	$HBoxContainer/TrackTime2.text = str(DotFlow.playback.audio_player.get_playback_position())
+	$HBoxContainer/TrackTime3.text = str(float($HBoxContainer/TrackTime.text) - float($HBoxContainer/TrackTime2.text))
+	_track_time_audio_slippage_and_correct(time)
 
+func _track_time_audio_slippage_and_correct(time: float):
+	var track_time: float = time
+	var audio_time: float = DotFlow.playback.audio_player.get_playback_position()
+	
+	if audio_time == 0:
+		return
+	
+	var slip: float = track_time - audio_time 
+	if slip < -0.1 or slip > 0.1:
+		DotFlow.playback._set_track_time_force(audio_time)
 
 func _on_play_toggled(toggled_on):
 	if toggled_on:

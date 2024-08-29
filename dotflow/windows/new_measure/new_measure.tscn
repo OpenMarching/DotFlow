@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://dotflow/windows/new_measure/new_measure.gd" id="1_fwjbg"]
 
 [node name="NewMeasure" type="Window"]
-title = "Insert Measure"
+title = "Insert Set"
 initial_position = 1
 size = Vector2i(300, 200)
 script = ExtResource("1_fwjbg")
@@ -19,7 +19,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Insert New Measure"
+text = "Insert New Set"
 horizontal_alignment = 1
 
 [node name="layout" type="HBoxContainer" parent="VBoxContainer"]

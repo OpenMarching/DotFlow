@@ -15,11 +15,11 @@ func _process(delta):
 func _follow_timeline_cursor():
 	if DotFlow.playback.is_playing() and $HBoxContainer/ScrollContainer/VBoxContainer/Control/Cursor.position.x > 300:
 		var offset: float = DotFlow.playback.get_track_time()
-		$HBoxContainer/ScrollContainer.scroll_horizontal = offset * 50 - $HBoxContainer/ScrollContainer.size.x / 2
+		$HBoxContainer/ScrollContainer.scroll_horizontal = offset * DotFlow.config.get_value("timeline","pixel_per_second") - $HBoxContainer/ScrollContainer.size.x / 2
 
 
 func _set_local_time(_time: float):
-	timecursor.position.x = _time * 50
+	timecursor.position.x = _time * DotFlow.config.get_value("timeline","pixel_per_second")
 
 func _ready():
 	DotFlow.playback.track_time_changed.connect(_set_local_time)
@@ -30,6 +30,8 @@ func _ready():
 func _show_duration_changed(_duration: float):
 	_refresh_timeline()
 
+var thread
+
 func _refresh_timeline():
 	for i in timeline.get_children():
 		i.queue_free()
@@ -39,7 +41,10 @@ func _refresh_timeline():
 	for i in range(DotFlow.show.timeline.get_show_duration()):
 		var timesec = load("res://dotflow/widgets/timeline/timeline_second.tscn").instantiate()
 		timesec.time = int(i)
+		timesec.custom_minimum_size.x = DotFlow.config.get_value("timeline","pixel_per_second")
 		timetrack.add_child(timesec)
+	
+	$HBoxContainer/TimelineZoom/ZoomSlider.value = DotFlow.config.get_value("timeline","pixel_per_second")
 	
 	var timeline_sets: Array[Set] = DotFlow.show.timeline.get_sets()
 	
@@ -51,7 +56,7 @@ func _refresh_timeline():
 	
 	if DotFlow.show.timeline.delay_start > 0.0:
 		var panel = PanelContainer.new()
-		panel.custom_minimum_size.x = DotFlow.show.timeline.delay_start * 50.0
+		panel.custom_minimum_size.x = DotFlow.show.timeline.delay_start * DotFlow.config.get_value("timeline","pixel_per_second")
 		timeline.add_child(panel)
 	
 	for i in timeline_sets.size():
@@ -63,7 +68,7 @@ func _refresh_timeline():
 
 func _handle_drag(_delta: float):
 	if holding_mouse_down:
-		DotFlow.playback.set_track_time(clampf(event_position.x / 50, 0.0, float(DotFlow.show.timeline.get_show_duration())))
+		DotFlow.playback.set_track_time(clampf(event_position.x / DotFlow.config.get_value("timeline","pixel_per_second"), 0.0, float(DotFlow.show.timeline.get_show_duration())))
 	pass
 
 var holding_mouse_down: bool = false
@@ -77,3 +82,21 @@ func _on_timeline_timetrack_input(event):
 			holding_mouse_down = false
 	if event is InputEventMouseMotion:
 		event_position = event.position
+
+func _zoom_out():
+	var pps: float = DotFlow.config.get_value("timeline", "pixel_per_second")
+	DotFlow.config.update_value("timeline", "pixel_per_second", pps - 10)
+	DotFlow.events.timeline_refreshed.emit()
+
+func _zoom_in():
+	var pps: float = DotFlow.config.get_value("timeline", "pixel_per_second")
+	DotFlow.config.update_value("timeline", "pixel_per_second", pps + 10)
+	DotFlow.events.timeline_refreshed.emit()
+
+
+
+func _on_zoom_slider_drag_ended(value_changed):
+	if value_changed == true:
+		var zoom = $HBoxContainer/TimelineZoom/ZoomSlider.value
+		DotFlow.config.update_value("timeline", "pixel_per_second", zoom)
+		DotFlow.events.timeline_refreshed.emit()

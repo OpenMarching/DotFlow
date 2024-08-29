@@ -67,7 +67,7 @@ func update_value(section, key, value):
 	config.save(cfg_path)
 
 func get_value(section, key) -> Variant:
-	var error = cfg_data.get(section).get(key)
+	var error = cfg_data.get(section)
 	
 	match typeof(error):
 		TYPE_NIL:
@@ -81,10 +81,12 @@ func get_value(section, key) -> Variant:
 			
 			var alert_message = "( %s , %s ) Attempted to get value not valid in your configuration. Using Default. You may need to rebuild your Config." % [section, key]
 			OS.alert(alert_message, "Attempted to access invalid value.")
-			print(error)
+			_audit_and_update_config()
 			return default.get_value(section, key)
 	
-	return error
+	var err2 = error.get(key)
+	
+	return err2
 
 func _build_default_config():
 	var fs = DirAccess.open("user://")

@@ -32,6 +32,10 @@ func _show_duration_changed(_duration: float):
 
 var thread
 
+var timesec_ps = load("res://dotflow/widgets/timeline/timeline_second.tscn")
+var trackrender_ps = load("res://dotflow/widgets/timeline/timeline_track_length.tscn")
+var timelineitem_ps = load("res://dotflow/widgets/timeline/timeline_measure.tscn")
+
 func _refresh_timeline():
 	for i in timeline.get_children():
 		i.queue_free()
@@ -39,7 +43,7 @@ func _refresh_timeline():
 		i.queue_free()
 	
 	for i in range(DotFlow.show.timeline.get_show_duration()):
-		var timesec = load("res://dotflow/widgets/timeline/timeline_second.tscn").instantiate()
+		var timesec = timesec_ps.instantiate()
 		timesec.time = int(i)
 		timesec.custom_minimum_size.x = DotFlow.config.get_value("timeline","pixel_per_second")
 		timetrack.add_child(timesec)
@@ -51,7 +55,7 @@ func _refresh_timeline():
 	var audio_track = $HBoxContainer/ScrollContainer/VBoxContainer/AudioTrack
 	for i in audio_track.get_children():
 		i.queue_free()
-	var track_render = load("res://dotflow/widgets/timeline/timeline_track_length.tscn").instantiate()
+	var track_render = trackrender_ps.instantiate()
 	audio_track.add_child(track_render)
 	
 	if DotFlow.show.timeline.delay_start > 0.0:
@@ -60,7 +64,7 @@ func _refresh_timeline():
 		timeline.add_child(panel)
 	
 	for i in timeline_sets.size():
-		var timeline_item: TimelineMeasure = load("res://dotflow/widgets/timeline/timeline_measure.tscn").instantiate()
+		var timeline_item: TimelineMeasure = timelineitem_ps.instantiate()
 		timeline_item.measure_idx = i
 		timeline_item.counts = timeline_sets[i].count
 		timeline_item.tempo = timeline_sets[i].tempo
@@ -90,7 +94,8 @@ func _zoom_out():
 
 func _zoom_in():
 	var pps: float = DotFlow.config.get_value("timeline", "pixel_per_second")
-	DotFlow.config.update_value("timeline", "pixel_per_second", pps + 10)
+	var added_val = pps + 10
+	DotFlow.config.update_value("timeline", "pixel_per_second", added_val)
 	DotFlow.events.timeline_refreshed.emit()
 
 

@@ -1,11 +1,23 @@
 extends Node
 
-var load_progress: float = 0.0
+var progress: Array[float] = []
 
-var main_window = preload("res://dotflow/main_window.tscn")
+var loading_status: int
+
+var main_window_path = "res://dotflow/main_window.tscn"
+
+func _ready():
+	ResourceLoader.load_threaded_request(main_window_path)
 
 func _process(_delta):
-	$VBoxContainer/ProgressBar.value = load_progress
-	load_progress = load_progress + randf_range(100, 200) * _delta
-	if load_progress >= 150:
-		get_tree().change_scene_to_packed(main_window)
+	loading_status = ResourceLoader.load_threaded_get_status(main_window_path, progress)
+	
+	print(progress[0])
+	
+	match loading_status:
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
+			$VBoxContainer/ProgressBar.value = progress[0] * 200
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+			get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(main_window_path))
+		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED:
+			printerr("Error. Could not load Main Window")

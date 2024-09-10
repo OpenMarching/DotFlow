@@ -10,11 +10,14 @@ var tempo: int
 @onready var counts_box = $HBoxContainer/VBoxContainer/HBoxContainer
 @onready var label = $HBoxContainer/VBoxContainer/PanelContainer/Label
 
+var new_mes_ps = load("res://dotflow/windows/new_measure/new_measure.tscn")
+var count_ps = load("res://dotflow/widgets/timeline/timeline_measure_count.tscn")
+
 func _ready():
 	measure_start_time = DotFlow.show.timeline.get_set_times()[measure_idx].start
 	measure_length = DotFlow.show.timeline.get_set_times()[measure_idx].length
 	for i in range(counts):
-		var count = load("res://dotflow/widgets/timeline/timeline_measure_count.tscn").instantiate()
+		var count = count_ps.instantiate()
 		count.measure_idx = measure_idx
 		count.count = i + 1
 		count.total_counts = counts
@@ -26,7 +29,7 @@ func _ready():
 
 
 func _on_insert_measure_after_pressed():
-	var window = load("res://dotflow/windows/new_measure/new_measure.tscn").instantiate()
+	var window = new_mes_ps.instantiate()
 	window.measure_idx = measure_idx
 	self.add_child(window)
 

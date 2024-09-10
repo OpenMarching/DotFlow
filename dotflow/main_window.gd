@@ -27,4 +27,13 @@ func _on_editor_tab_changed(tab):
 
 
 func _on_panel_toggle_toggled(toggled_on):
-	$VBoxContainer/VSplitContainer/Panel.visible = toggled_on
+	$VBoxContainer/VSplitContainer/BottomPanePanels.visible = toggled_on
+
+
+func _on_tab_bar_tab_changed(tab):
+	for i in $VBoxContainer/VSplitContainer/BottomPanePanels.get_children():
+		i.visible = false
+	
+	var selected = $VBoxContainer/HBoxContainer/HBoxContainer/BottomPanelTabBar.get_tab_title(tab)
+	if selected == "Timeline":
+		$VBoxContainer/VSplitContainer/BottomPanePanels/Timeline.visible = true

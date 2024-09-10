@@ -41,6 +41,10 @@ func get_sets() -> Array[Set]:
 func get_set_times() -> Array[SetTimes]:
 	var arr: Array[SetTimes] = []
 	var start_time: float = 0 + delay_start
+	if delay_start > 0.0:
+		var _set = SetTimes.new()
+		_set.start = 0.0
+		_set.length = delay_start
 	for i in _sets:
 		var _set = SetTimes.new()
 		_set.start = start_time

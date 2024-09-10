@@ -2,7 +2,7 @@ class_name DotFlowShowAudio
 extends Node
 
 var audio_track: AudioStreamMP3 = AudioStreamMP3.new()
-@export var audio_path = "/home/Noah/Desktop/Piotr Musiał - Frostpunk (Original Soundtrack) - 09 - The City Must Survive.mp3"
+@export var audio_path = "E:/SteamLibrary/steamapps/common/Rock of Ages/Original Soundtrack/01 - Main Theme.mp3"
 
 
 func _ready():

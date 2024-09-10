@@ -31,6 +31,10 @@ UtilsArr="*res://dotflow/utils/arr.gd"
 
 window/size/mode=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [gui]
 
 theme/custom="res://ui/dot_flow_theme.tres"

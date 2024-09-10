@@ -121,6 +121,7 @@ func _playing_changed(playing: bool):
 			_play_track_at(get_track_time())
 		else:
 			printerr("Track Position Exceeds Audio Length.")
+			Toast.message("Track Position Exceeds Audio Length.")
 	else:
 		_stop_track()
 

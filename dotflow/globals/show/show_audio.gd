@@ -2,7 +2,7 @@ class_name DotFlowShowAudio
 extends Node
 
 var audio_track: AudioStreamMP3 = AudioStreamMP3.new()
-@export var audio_path = "E:/SteamLibrary/steamapps/common/Rock of Ages/Original Soundtrack/01 - Main Theme.mp3"
+@export var audio_path = "E:/SteamLibrary/steamapps/music/Satisfactory Official Soundtrack/Satisfactory Soundtrack MP3/Satisfactory OST/MP3/01 Ficsit Inc.mp3"
 
 
 func _ready():

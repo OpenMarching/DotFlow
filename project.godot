@@ -26,6 +26,7 @@ buses/default_bus_layout=""
 
 DotFlow="*res://dotflow/dot_flow_global.gd"
 UtilsArr="*res://dotflow/utils/arr.gd"
+Toast="*res://dotflow/widgets/toaster/toaster_global.gd"
 
 [display]
 

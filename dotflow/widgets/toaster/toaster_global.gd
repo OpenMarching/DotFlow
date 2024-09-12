@@ -20,6 +20,7 @@ func message(message: String, time: float = 5):
 	var tst = ToastItem.new()
 	tst.text = message
 	tst.time = time
+	tst.init_time = time
 	tst.type = "info"
 	_add_to_array(tst)
 
@@ -27,6 +28,7 @@ class ToastItem:
 	var text: String
 	var type: String
 	var time: float
+	var init_time: float
 
 func _process(delta):
 	for i in _toasts:

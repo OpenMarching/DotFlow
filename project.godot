@@ -28,12 +28,6 @@ DotFlow="*res://dotflow/dot_flow_global.gd"
 UtilsArr="*res://dotflow/utils/arr.gd"
 Toast="*res://dotflow/widgets/toaster/toaster_global.gd"
 
-[display]
-
-window/size/viewport_width=2304
-window/size/viewport_height=1296
-window/stretch/scale=2.0
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")

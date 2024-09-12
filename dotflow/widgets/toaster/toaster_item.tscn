@@ -4,26 +4,35 @@
 [ext_resource type="Texture2D" uid="uid://caocoqw3pg1p7" path="res://addons/lucide/icons/info.svg" id="2_ix8tn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjckv"]
-bg_color = Color(0.347817, 0.347817, 0.347817, 1)
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [node name="ToasterItem" type="PanelContainer"]
-offset_right = 48.0
-offset_bottom = 24.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_bottom = 26.0
+grow_horizontal = 0
+size_flags_horizontal = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_vjckv")
 script = ExtResource("1_nvfad")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="TextureRect" type="TextureRect" parent="VBox/HBox"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_ix8tn")
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="VBox/HBox"]
 layout_mode = 2

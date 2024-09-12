@@ -3,7 +3,9 @@ extends Window
 var measure_idx: int
 
 func _ready():
+	$VBoxContainer/Tabs/Counts/layout/counts/counts.value = DotFlow.show.timeline.get_sets()[measure_idx].count
 	$VBoxContainer/Tabs/Counts/layout/bpm/bpm.value = DotFlow.show.timeline.get_sets()[measure_idx].tempo
+	$VBoxContainer/Tabs/Time/layout/time/time.value = DotFlow.show.timeline.get_sets()[measure_idx].time
 
 func _on_close_requested():
 	self.queue_free()

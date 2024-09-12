@@ -12,8 +12,6 @@ func _ready():
 func _process(_delta):
 	loading_status = ResourceLoader.load_threaded_get_status(main_window_path, progress)
 	
-	print(progress[0])
-	
 	match loading_status:
 		ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
 			$VBoxContainer/ProgressBar.value = progress[0] * 200

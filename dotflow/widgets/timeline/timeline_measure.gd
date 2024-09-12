@@ -12,8 +12,12 @@ var time: float
 @onready var counts_box = $HBoxContainer/VBoxContainer/HBoxContainer
 @onready var label = $HBoxContainer/VBoxContainer/PanelContainer/Label
 
-var new_mes_ps = load("res://dotflow/windows/new_measure/new_measure.tscn")
-var count_ps = load("res://dotflow/widgets/timeline/timeline_measure_count.tscn")
+var new_mes_ps = preload("res://dotflow/windows/new_measure/new_measure.tscn")
+var count_ps = preload("res://dotflow/widgets/timeline/timeline_measure_count.tscn")
+
+func _process(delta):
+	if not is_inside_tree():
+		self.free()
 
 func _ready():
 	measure_start_time = DotFlow.show.timeline.get_set_times()[measure_idx].start

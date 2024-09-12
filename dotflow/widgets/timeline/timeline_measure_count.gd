@@ -7,6 +7,7 @@ var time: float = 0.0
 var tempo: int = 0
 
 
+
 func _set_track_to_location():
 	var measure_start_time = DotFlow.show.timeline.get_set_times()[measure_idx].start
 	var measure_length = DotFlow.show.timeline.get_set_times()[measure_idx].length

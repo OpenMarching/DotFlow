@@ -1,5 +1,6 @@
 class_name Timeline
 extends Control
+## TODO: Somewhere in the timeline on rerenders, Nodes are being orphaned like crazy, needs further investigation and mitigation strategies.
 
 @onready var timeline = $HBoxContainer/ScrollContainer/VBoxContainer/TimelineMeasures
 @onready var timetrack = $HBoxContainer/ScrollContainer/VBoxContainer/TimeSequence
@@ -32,9 +33,9 @@ func _show_duration_changed(_duration: float):
 
 var thread
 
-var timesec_ps = load("res://dotflow/widgets/timeline/timeline_second.tscn")
-var trackrender_ps = load("res://dotflow/widgets/timeline/timeline_track_length.tscn")
-var timelineitem_ps = load("res://dotflow/widgets/timeline/timeline_measure.tscn")
+var timesec_ps = preload("res://dotflow/widgets/timeline/timeline_second.tscn")
+var trackrender_ps = preload("res://dotflow/widgets/timeline/timeline_track_length.tscn")
+var timelineitem_ps = preload("res://dotflow/widgets/timeline/timeline_measure.tscn")
 
 func _refresh_timeline():
 	for i in timeline.get_children():

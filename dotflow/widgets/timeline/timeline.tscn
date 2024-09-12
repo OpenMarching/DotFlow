@@ -44,7 +44,6 @@ size_flags_vertical = 3
 theme_override_constants/separation = 2
 
 [node name="Control" type="Control" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
-z_index = 1
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 

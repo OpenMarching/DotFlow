@@ -2,6 +2,7 @@ extends Control
 
 func _ready():
 	_on_editor_tab_changed($VBoxContainer/MenuBar/TabBar.current_tab)
+	_on_tab_bar_tab_changed($VBoxContainer/HBoxContainer/HBoxContainer/BottomPanelTabBar.current_tab)
 	$VBoxContainer/VSplitContainer.offset_top = 100
 
 func _on_editor_tab_changed(tab):

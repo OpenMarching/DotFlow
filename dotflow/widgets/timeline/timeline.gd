@@ -70,6 +70,8 @@ func _refresh_timeline():
 	for i in timeline_sets.size():
 		var timeline_item: TimelineMeasure = timelineitem_ps.instantiate()
 		timeline_item.measure_idx = i
+		timeline_item.time_based = timeline_sets[i].time_based
+		timeline_item.time = timeline_sets[i].time
 		timeline_item.counts = timeline_sets[i].count
 		timeline_item.tempo = timeline_sets[i].tempo
 		timeline.add_child(timeline_item)

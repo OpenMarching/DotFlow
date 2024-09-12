@@ -48,12 +48,14 @@ vertical_alignment = 2
 clip_text = true
 
 [node name="InsertMeasureAfter" type="Button" parent="."]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 tooltip_text = "Insert After"
 focus_mode = 0
 icon = ExtResource("2_4ww4d")
+clip_text = true
 
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/PanelContainer" to="." method="_on_panel_container_gui_input"]
 [connection signal="pressed" from="InsertMeasureAfter" to="." method="_on_insert_measure_after_pressed"]

@@ -29,5 +29,5 @@ func _on_button_gui_input(event):
 
 
 func _split_measure():
-	DotFlow.show.timeline.update_measure_at(measure_idx, count - 1, tempo)
-	DotFlow.show.timeline.insert_measure_at(measure_idx + 1, total_counts - count + 1, tempo)
+	DotFlow.show.timeline.update_measure_at(measure_idx, false,{ "counts": count - 1, "tempo": tempo})
+	DotFlow.show.timeline.insert_measure_at(measure_idx + 1, false, {"counts": total_counts - count + 1, "tempo": tempo})

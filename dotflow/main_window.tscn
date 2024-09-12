@@ -215,8 +215,8 @@ size_flags_horizontal = 3
 focus_mode = 0
 tab_count = 3
 clip_tabs = false
-tab_0/title = "Output"
-tab_1/title = "Timeline"
+tab_0/title = "Timeline"
+tab_1/title = "Output"
 tab_2/title = "Console"
 
 [node name="PlaybackControls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("12_4snb0")]

@@ -2,9 +2,13 @@ extends Control
 
 
 func _ready():
+	for i in [$HBoxContainer/Track,$HBoxContainer/Audio,$HBoxContainer/Slip]:
+		i.visible = DotFlow.config.get_value("debug","track_time_slippage")
+	
+	
 	DotFlow.playback.is_playing_changed.connect(_is_playing_changed)
 	DotFlow.playback.track_time_changed.connect(_track_time_changed)
-	$HBoxContainer/TrackTime.text = "0.0000"
+	$HBoxContainer/Track.text = "0.0000"
 	$HBoxContainer/AudioVolume.value = DotFlow.playback.get_player_volume()
 
 func _is_playing_changed(is_playing: bool):
@@ -12,9 +16,9 @@ func _is_playing_changed(is_playing: bool):
 		$HBoxContainer/Play.button_pressed = false
 
 func _track_time_changed(time: float):
-	$HBoxContainer/TrackTime.text = str("%.04f" % time)
-	$HBoxContainer/TrackTime2.text = str(DotFlow.playback.audio_player.get_playback_position())
-	$HBoxContainer/TrackTime3.text = str(float($HBoxContainer/TrackTime.text) - float($HBoxContainer/TrackTime2.text))
+	$HBoxContainer/Track.text = str("%.04f" % time)
+	$HBoxContainer/Audio.text = str(DotFlow.playback.audio_player.get_playback_position())
+	$HBoxContainer/Slip.text = str(float($HBoxContainer/Track.text) - float($HBoxContainer/Audio.text))
 	_track_time_audio_slippage_and_correct(time)
 
 func _track_time_audio_slippage_and_correct(time: float):

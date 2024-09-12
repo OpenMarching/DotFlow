@@ -62,10 +62,9 @@ func _refresh_timeline():
 	var track_render = trackrender_ps.instantiate()
 	audio_track.add_child(track_render)
 	
-	if DotFlow.show.timeline.delay_start > 0.0:
-		var panel = PanelContainer.new()
-		panel.custom_minimum_size.x = DotFlow.show.timeline.delay_start * DotFlow.config.get_value("timeline","pixel_per_second")
-		timeline.add_child(panel)
+	if timeline_sets.size() < 1:
+		var empty = load("res://dotflow/widgets/timeline/empty_timeline.tscn").instantiate()
+		timeline.add_child(empty)
 	
 	for i in timeline_sets.size():
 		var timeline_item: TimelineMeasure = timelineitem_ps.instantiate()

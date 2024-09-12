@@ -3,17 +3,20 @@ extends Node
 
 signal show_duration_changed(length: int)
 
+var _show_duration: float = 145
+
 var delay_start: float = 0
 
 var _sets: Array[Set] = [
-	Set.new(true, {"time": 10.0}),
-	Set.new(false, {"counts": 8, "tempo": 120}),
-	Set.new(false, {"counts": 12, "tempo": 120}),
-	Set.new(false, {"counts": 4, "tempo": 60}),
+	#Set.new(true, {"time": 10.0}),
+	#Set.new(false, {"counts": 8, "tempo": 120}),
+	#Set.new(false, {"counts": 12, "tempo": 120}),
+	#Set.new(false, {"counts": 4, "tempo": 60}),
 ]
 
 func delete_measure_at(index: int):
 	_sets.remove_at(index)
+	DotFlow.events.timeline_refreshed.emit()
 
 func update_measure_at(index: int, use_time: bool, options: Dictionary):
 	print(_sets[index])
@@ -32,14 +35,14 @@ func insert_measure_at(index: int, use_time: bool, options: Dictionary):
 		_sets.insert(index, Set.new(false, {"counts": options["counts"], "tempo": options["tempo"]}))
 	DotFlow.events.timeline_refreshed.emit()
 
-var _show_duration: float = 600
-
 func get_show_duration() -> float:
 	return _show_duration
 
 ## Sets the Show Length Duration in Seconds
 func set_show_duration(duration: int):
 	_show_duration = duration
+	if _show_duration < DotFlow.show.audio.get_audio_track_length():
+		Toast.message("Show Duration Is Shorter Than Audio Track Length")
 	show_duration_changed.emit(duration)
 
 func get_sets() -> Array[Set]:
@@ -47,11 +50,7 @@ func get_sets() -> Array[Set]:
 
 func get_set_times() -> Array[SetTimes]:
 	var arr: Array[SetTimes] = []
-	var start_time: float = 0 + delay_start
-	if delay_start > 0.0:
-		var _set = SetTimes.new()
-		_set.start = 0.0
-		_set.length = delay_start
+	var start_time: float = 0
 	for i in _sets:
 		var _set = SetTimes.new()
 		_set.start = start_time
@@ -64,10 +63,3 @@ func get_set_times() -> Array[SetTimes]:
 		
 		arr.append(_set)
 	return arr
-
-func get_start_delay() -> float:
-	return delay_start
-
-func set_start_delay(delay: float):
-	delay_start = delay
-	DotFlow.events.timeline_refreshed.emit()

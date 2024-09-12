@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt7x7inwm7mjk"]
+
+[ext_resource type="Script" path="res://dotflow/windows/show_options/show_options.gd" id="1_n8617"]
+
+[node name="ShowOptions" type="Window"]
+title = "Update Show Options"
+initial_position = 1
+size = Vector2i(600, 400)
+script = ExtResource("1_n8617")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Audio" type="ScrollContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Path" type="HBoxContainer" parent="VBoxContainer/TabContainer/Audio/Options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Audio/Options/Path"]
+layout_mode = 2
+text = "Audio Track Path"
+
+[node name="Path" type="LineEdit" parent="VBoxContainer/TabContainer/Audio/Options/Path"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Update" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Update
+"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_close_requested"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Update" to="." method="_on_update_pressed"]

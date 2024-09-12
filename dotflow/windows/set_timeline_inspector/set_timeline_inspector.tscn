@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://n05rt3y7nqok"]
+
+[ext_resource type="Script" path="res://dotflow/windows/set_timeline_inspector/set_timeline_inspector.gd" id="1_ou6ol"]
+
+[node name="SetTimelineInspector" type="Window"]
+title = "Set Timeline Inspector"
+initial_position = 1
+size = Vector2i(400, 400)
+exclusive = true
+script = ExtResource("1_ou6ol")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

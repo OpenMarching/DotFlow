@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://vcy5oo03pax"]
+[gd_scene load_steps=18 format=3 uid="uid://vcy5oo03pax"]
 
 [ext_resource type="Theme" uid="uid://byybas1pqtudt" path="res://ui/dot_flow_theme.tres" id="1_4vjje"]
 [ext_resource type="Script" path="res://dotflow/main_window.gd" id="1_pnxs0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://dotflow/menus/edit.gd" id="3_c0nam"]
 [ext_resource type="Script" path="res://dotflow/menus/camera.gd" id="3_nmvyh"]
 [ext_resource type="Script" path="res://dotflow/menus/help.gd" id="3_tw4mc"]
+[ext_resource type="Script" path="res://dotflow/menus/show.gd" id="4_5mxqq"]
 [ext_resource type="PackedScene" uid="uid://dt0ud7camvste" path="res://dotflow/viewports/paper/paper.tscn" id="5_f5pgd"]
 [ext_resource type="PackedScene" uid="uid://d2hoqar47bp2u" path="res://dotflow/widgets/timeline/timeline.tscn" id="11_4d1ih"]
 [ext_resource type="Texture2D" uid="uid://cfqya7ly3nbrl" path="res://addons/lucide/icons/panel-bottom-open.svg" id="11_tn6wr"]
@@ -15,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://oskicwc4ul2n" path="res://addons/lucide/icons/panel-bottom-close.svg" id="12_05any"]
 [ext_resource type="Texture2D" uid="uid://cljb2opi08v0f" path="res://addons/lucide/icons/panel-bottom.svg" id="12_av6x7"]
 [ext_resource type="PackedScene" uid="uid://b4r5cs2sc75ex" path="res://dotflow/widgets/toaster/toaster.tscn" id="15_5nw2e"]
+[ext_resource type="Script" path="res://dotflow/Timer.gd" id="17_vns12"]
 
 [node name="MainWindow" type="Control"]
 layout_mode = 3
@@ -53,7 +55,8 @@ script = ExtResource("3_c0nam")
 
 [node name="Select" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 
-[node name="Peformers" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
+[node name="Show" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
+script = ExtResource("4_5mxqq")
 
 [node name="Camera" type="PopupMenu" parent="VBoxContainer/MenuBar/MenuBar"]
 item_count = 1
@@ -243,10 +246,16 @@ flat = true
 layout_mode = 1
 mouse_filter = 2
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("17_vns12")
+
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/File" to="VBoxContainer/MenuBar/MenuBar/File" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Edit" to="VBoxContainer/MenuBar/MenuBar/Edit" method="_on_id_pressed"]
+[connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Show" to="VBoxContainer/MenuBar/MenuBar/Show" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Camera" to="VBoxContainer/MenuBar/MenuBar/Camera" method="_on_id_pressed"]
 [connection signal="id_pressed" from="VBoxContainer/MenuBar/MenuBar/Help" to="VBoxContainer/MenuBar/MenuBar/Help" method="_on_id_pressed"]
 [connection signal="tab_clicked" from="VBoxContainer/MenuBar/TabBar" to="." method="_on_editor_tab_changed"]
 [connection signal="tab_changed" from="VBoxContainer/HBoxContainer/HBoxContainer/BottomPanelTabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/HBoxContainer2/PanelToggle" to="." method="_on_panel_toggle_toggled"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

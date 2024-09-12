@@ -14,39 +14,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Tabs" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+
+[node name="Counts" type="VBoxContainer" parent="VBoxContainer/Tabs"]
+layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Counts"]
 layout_mode = 2
-text = "Insert New Set"
+text = "Insert Set (Counts)"
 horizontal_alignment = 1
 
-[node name="layout" type="HBoxContainer" parent="VBoxContainer"]
+[node name="layout" type="HBoxContainer" parent="VBoxContainer/Tabs/Counts"]
 layout_mode = 2
 alignment = 1
 
-[node name="counts" type="VBoxContainer" parent="VBoxContainer/layout"]
+[node name="counts" type="VBoxContainer" parent="VBoxContainer/Tabs/Counts/layout"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/layout/counts"]
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Counts/layout/counts"]
 layout_mode = 2
 text = "Counts"
 
-[node name="counts" type="SpinBox" parent="VBoxContainer/layout/counts"]
+[node name="counts" type="SpinBox" parent="VBoxContainer/Tabs/Counts/layout/counts"]
 layout_mode = 2
 allow_greater = true
 
-[node name="bpm" type="VBoxContainer" parent="VBoxContainer/layout"]
+[node name="bpm" type="VBoxContainer" parent="VBoxContainer/Tabs/Counts/layout"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/layout/bpm"]
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Counts/layout/bpm"]
 layout_mode = 2
 text = "BPM
 "
 
-[node name="bpm" type="SpinBox" parent="VBoxContainer/layout/bpm"]
+[node name="bpm" type="SpinBox" parent="VBoxContainer/Tabs/Counts/layout/bpm"]
 layout_mode = 2
+allow_greater = true
+
+[node name="Time" type="VBoxContainer" parent="VBoxContainer/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Time"]
+layout_mode = 2
+text = "Insert Set (Time)"
+horizontal_alignment = 1
+
+[node name="layout" type="HBoxContainer" parent="VBoxContainer/Tabs/Time"]
+layout_mode = 2
+alignment = 1
+
+[node name="time" type="VBoxContainer" parent="VBoxContainer/Tabs/Time/layout"]
+layout_mode = 2
+
+[node name="seconds" type="Label" parent="VBoxContainer/Tabs/Time/layout/time"]
+layout_mode = 2
+text = "Seconds (Allows Decimals)"
+
+[node name="time" type="SpinBox" parent="VBoxContainer/Tabs/Time/layout/time"]
+layout_mode = 2
+step = 0.0
 allow_greater = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -60,7 +95,7 @@ text = "Cancel"
 
 [node name="Ok" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Insert"
+text = "Update"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_close_requested"]

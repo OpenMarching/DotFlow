@@ -47,9 +47,22 @@ text = "8 Counts"
 vertical_alignment = 2
 clip_text = true
 
-[node name="InsertMeasureAfter" type="Button" parent="."]
-clip_contents = true
+[node name="Control" type="Control" parent="."]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="InsertMeasureAfter" type="Button" parent="Control"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -33.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 tooltip_text = "Insert After"
@@ -58,4 +71,4 @@ icon = ExtResource("2_4ww4d")
 clip_text = true
 
 [connection signal="gui_input" from="HBoxContainer/VBoxContainer/PanelContainer" to="." method="_on_panel_container_gui_input"]
-[connection signal="pressed" from="InsertMeasureAfter" to="." method="_on_insert_measure_after_pressed"]
+[connection signal="pressed" from="Control/InsertMeasureAfter" to="." method="_on_insert_measure_after_pressed"]

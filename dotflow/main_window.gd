@@ -38,3 +38,7 @@ func _on_tab_bar_tab_changed(tab):
 	var selected = $VBoxContainer/HBoxContainer/HBoxContainer/BottomPanelTabBar.get_tab_title(tab)
 	if selected == "Timeline":
 		$VBoxContainer/VSplitContainer/BottomPanePanels/Timeline.visible = true
+
+
+func _on_timer_timeout():
+	print_orphan_nodes()

@@ -10,6 +10,9 @@ func _ready():
 	$VBoxContainer/Tabs/Counts/layout/bpm/bpm.value = measure.tempo
 	
 	$VBoxContainer/Tabs/Time/layout/time/time.value = measure.time
+	
+	$VBoxContainer/Tabs/Counts/Label.text = "Update Set %s (Counts)" % measure_idx
+	$VBoxContainer/Tabs/Time/Label.text = "Update Set %s (Time)" % measure_idx
 
 func _on_close_requested():
 	self.queue_free()

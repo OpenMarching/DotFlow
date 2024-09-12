@@ -45,8 +45,6 @@ func _on_insert_measure_after_pressed():
 func _on_panel_container_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_mask == MOUSE_BUTTON_LEFT:
-			for i in DotFlow.show.timeline.get_set_times():
-				print(i.start)
 			var start_time = DotFlow.show.timeline.get_set_times()[measure_idx].start
 			DotFlow.playback.set_track_time(start_time)
 		if event.button_mask == MOUSE_BUTTON_RIGHT:

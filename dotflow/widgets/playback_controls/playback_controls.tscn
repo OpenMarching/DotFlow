@@ -73,15 +73,15 @@ focus_mode = 0
 icon = ExtResource("7_eujpd")
 flat = true
 
-[node name="TrackTime" type="LineEdit" parent="HBoxContainer"]
+[node name="Track" type="LineEdit" parent="HBoxContainer"]
 layout_mode = 2
 editable = false
 
-[node name="TrackTime2" type="LineEdit" parent="HBoxContainer"]
+[node name="Audio" type="LineEdit" parent="HBoxContainer"]
 layout_mode = 2
 editable = false
 
-[node name="TrackTime3" type="LineEdit" parent="HBoxContainer"]
+[node name="Slip" type="LineEdit" parent="HBoxContainer"]
 layout_mode = 2
 editable = false
 

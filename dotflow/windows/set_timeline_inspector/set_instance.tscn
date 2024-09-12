@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dijo2ktpia2wp"]
+
+[ext_resource type="Script" path="res://dotflow/windows/set_timeline_inspector/set_instance.gd" id="1_q8gaq"]
+[ext_resource type="Texture2D" uid="uid://bixrtmc34s7ss" path="res://addons/lucide/icons/delete.svg" id="2_lyyjx"]
+[ext_resource type="Texture2D" uid="uid://xe1rovbpxrmm" path="res://addons/lucide/icons/timer.svg" id="2_thsld"]
+[ext_resource type="Texture2D" uid="uid://r50abvpr5843" path="res://addons/lucide/icons/columns-4.svg" id="3_6lr8x"]
+
+[node name="SetInstance" type="PanelContainer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q8gaq")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Id" type="Label" parent="HBox"]
+layout_mode = 2
+text = "Set ###"
+
+[node name="CheckButton" type="CheckButton" parent="HBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_icons/checked_disabled = ExtResource("2_thsld")
+theme_override_icons/unchecked_disabled = ExtResource("3_6lr8x")
+disabled = true
+
+[node name="Info" type="Label" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Set Info"
+
+[node name="Button" type="Button" parent="HBox"]
+layout_mode = 2
+icon = ExtResource("2_lyyjx")
+
+[connection signal="pressed" from="HBox/Button" to="." method="_on_button_pressed"]

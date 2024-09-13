@@ -2,6 +2,8 @@ class_name DotFlowShowTimeline
 extends Node
 
 signal show_duration_changed(length: int)
+signal show_set_deleted(idx: int)
+signal show_set_inserted(idx: int)
 
 var _show_duration: float = 145
 
@@ -16,6 +18,7 @@ var _sets: Array[Set] = [
 
 func delete_measure_at(index: int):
 	_sets.remove_at(index)
+	show_set_deleted.emit(index)
 	DotFlow.events.timeline_refreshed.emit()
 
 func update_measure_at(index: int, use_time: bool, options: Dictionary):
@@ -33,6 +36,7 @@ func insert_measure_at(index: int, use_time: bool, options: Dictionary):
 		_sets.insert(index, Set.new(true, {"time": options["time"]}))
 	else:
 		_sets.insert(index, Set.new(false, {"counts": options["counts"], "tempo": options["tempo"]}))
+	show_set_inserted.emit(index)
 	DotFlow.events.timeline_refreshed.emit()
 
 func get_show_duration() -> float:

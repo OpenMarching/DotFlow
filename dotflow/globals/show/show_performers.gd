@@ -7,13 +7,15 @@ var performers: Array[Performer]
 var selected_performers: Array[Performer]
 
 
-class Performer:
-	var type: int
-	var label: String
-	var name: String
-	var sets: Array[DotSets]
+func _ready():
+	DotFlow.show.timeline.show_set_inserted.connect(_set_inserted)
+	DotFlow.show.timeline.show_set_deleted.connect(_set_deleted)
+	performers.append(Performer.new())
 
-class DotSets:
-	var location: Vector2
-	var height: float
-	var rotation: float
+func _set_inserted(idx):
+	for i in performers:
+		i._set_inserted(idx)
+
+func _set_deleted(idx):
+	for i in performers:
+		i._set_deleted(idx)

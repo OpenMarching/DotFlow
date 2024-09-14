@@ -1,32 +1,48 @@
 class_name Performer
 extends Node
 
-var _type: int
+var available_options = ["type", "label", "name"]
 
+func _init(options: Dictionary = {}):
+	for key in options.keys():
+		if available_options.has(key):
+			if key == "type":
+				set_type(options["type"])
+			if key == "label":
+				set_label(options["label"])
+			if key == "name":
+				set_name(options["name"])
+		else:
+			OS.alert("Attempted to set an invalid performer option on initialize.")
+	pass
+
+var _type: int
+var _label: String
+var _perf_name: String
+var _sets: Array[PerformerSet]
+
+## type
 func get_type() -> int:
 	return _type
 
 func set_type(type: int):
 	_type = type
 
-var _label: String
-
+## label
 func get_label() -> String:
 	return _label
 
 func set_label(label: String):
 	_label = label
 
-var _perf_name: String
-
+## name
 func get_perf_name() -> String:
 	return _perf_name
 
 func set_perf_name(perf_name: String):
 	_perf_name = perf_name
 
-var _sets: Array[PerformerSet]
-
+## sets
 func get_sets() -> Array[PerformerSet]:
 	return _sets
 

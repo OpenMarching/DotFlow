@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://be6o37mneu7me"]
+
+[ext_resource type="Script" path="res://dotflow/viewports/editor_2d/editor_2d.gd" id="1_gu8ed"]
+[ext_resource type="PackedScene" uid="uid://cbssvpajehul6" path="res://dotflow/classes/2d_camera/2d_camera.tscn" id="3_1ws1t"]
+
+[node name="2dEditor" type="Node2D"]
+script = ExtResource("1_gu8ed")
+
+[node name="2dCamera" parent="." instance=ExtResource("3_1ws1t")]
+
+[node name="PerformersParent" type="Node2D" parent="."]

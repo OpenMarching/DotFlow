@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1wl0ckaopx1c"]
+
+[ext_resource type="Script" path="res://dotflow/classes/performer_2d/performer_2d.gd" id="1_ny88d"]
+[ext_resource type="Texture2D" uid="uid://bvc0pank2wvuk" path="res://textures/LocationIcon.png" id="2_g6tl4"]
+[ext_resource type="Texture2D" uid="uid://byw2bas2fecnh" path="res://textures/SelectionIcon.png" id="3_sio4l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8qjq"]
+size = Vector2(30, 30)
+
+[node name="2dPerformer" type="Node2D"]
+script = ExtResource("1_ny88d")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_f8qjq")
+
+[node name="LocationSprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_g6tl4")
+
+[node name="Label" type="Label" parent="."]
+offset_top = -75.0
+offset_right = 40.0
+offset_bottom = -52.0
+text = "A7"
+vertical_alignment = 2
+
+[node name="SelectedSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_sio4l")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
